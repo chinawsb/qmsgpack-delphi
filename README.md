@@ -2,6 +2,10 @@
 
 It's like JSON but small and fast.
 
+author: swish
+
+this project belong qdac3
+
 qdac3 url:
   http://sourceforge.net/p/qdac3
   
