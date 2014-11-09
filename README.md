@@ -9,7 +9,7 @@ QDAC 3.0 team with follow information:
     E-Mail:chinawsb@sina.com
     QQ Group:250530692
     Forum:http://tieba.baidu.com/f?kw=qdac
-    Blog:http://hi.baidu.com/chineseswish
+    web:http://www.qdac.cc
     SVN:http://svn.code.sf.net/p/qdac3/code/ or svn://svn.code.sf.net/p/qdac3/code/
     Author:swish
 
