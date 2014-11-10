@@ -21,7 +21,7 @@ QMsgPack is not a desgin time package.So just place QMsgPack files into search p
 
 · Post in forum (http://tieba.baidu.com/f?kw=qdac)
 
-· QQ Group (250530692)
+· QQ Group No：250530692 (http://jq.qq.com/?_wv=1027&k=ZH6mZR)
 
 ### Source check out
 · HTTP (http://svn.code.sf.net/p/qdac3/code/)
