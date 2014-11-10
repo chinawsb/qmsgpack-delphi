@@ -15,7 +15,7 @@ QMsgPack is a part of QDAC 3.0,Source code hosted in Sourceforge(http://sourcefo
 QMsgPack is not a desgin time package.So just place QMsgPack files into search path and add to your project.
 
 ### Support
-· Topic in Website (http://www.qdac.cc/?cat=44),CHINESE only
+· Topic in Website (http://www.qdac.cc/?cat=44) ,CHINESE only
 
 · Mail to author (chinawsb@sina.com)
 
