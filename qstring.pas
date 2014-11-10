@@ -4,62 +4,78 @@ unit qstring;
 interface
 
 {
-  ±¾Ô´ÂëÀ´×ÔQDACÏîÄ¿£¬°æÈ¨¹éswish(QQ:109867294)ËùÓĞ¡£
-  (1)¡¢Ê¹ÓÃĞí¿É¼°ÏŞÖÆ
-  Äú¿ÉÒÔ×ÔÓÉ¸´ÖÆ¡¢·Ö·¢¡¢ĞŞ¸Ä±¾Ô´Âë£¬µ«ÄúµÄĞŞ¸ÄÓ¦¸Ã·´À¡¸ø×÷Õß£¬²¢ÔÊĞí×÷ÕßÔÚ±ØÒªÊ±£¬
-  ºÏ²¢µ½±¾ÏîÄ¿ÖĞÒÔ¹©Ê¹ÓÃ£¬ºÏ²¢ºóµÄÔ´ÂëÍ¬Ñù×ñÑ­QDAC°æÈ¨ÉùÃ÷ÏŞÖÆ¡£
-  ÄúµÄ²úÆ·µÄ¹ØÓÚÖĞ£¬Ó¦°üº¬ÒÔÏÂµÄ°æ±¾ÉùÃ÷:
-  ±¾²úÆ·Ê¹ÓÃµÄJSON½âÎöÆ÷À´×ÔQDACÏîÄ¿ÖĞµÄQJSON£¬°æÈ¨¹é×÷ÕßËùÓĞ¡£
-  (2)¡¢¼¼ÊõÖ§³Ö
-  ÓĞ¼¼ÊõÎÊÌâ£¬Äú¿ÉÒÔ¼ÓÈëQDAC¹Ù·½QQÈº250530692¹²Í¬Ì½ÌÖ¡£
-  (3)¡¢ÔŞÖú
-  Äú¿ÉÒÔ×ÔÓÉÊ¹ÓÃ±¾Ô´Âë¶ø²»ĞèÒªÖ§¸¶ÈÎºÎ·ÑÓÃ¡£Èç¹ûÄú¾õµÃ±¾Ô´Âë¶ÔÄúÓĞ°ïÖú£¬Äú¿ÉÒÔÔŞ
-  Öú±¾ÏîÄ¿£¨·ÇÇ¿ÖÆ£©£¬ÒÔÊ¹×÷Õß²»ÎªÉú»îËùÆÈ£¬ÓĞ¸ü¶àµÄ¾«Á¦ÎªÄú³ÊÏÖ¸üºÃµÄ×÷Æ·£º
-  ÔŞÖú·½Ê½£º
-  Ö§¸¶±¦£º guansonghuan@sina.com ĞÕÃû£º¹ÜËÊå¾
-  ½¨ÉèÒøĞĞ£º
-  »§Ãû£º¹ÜËÊå¾
-  ÕËºÅ£º4367 4209 4324 0179 731
-  ¿ª»§ĞĞ£º½¨ÉèÒøĞĞ³¤´ºÍÅ·ç´¢ĞîËù
+  æœ¬æºç æ¥è‡ªQDACé¡¹ç›®ï¼Œç‰ˆæƒå½’swish(QQ:109867294)æ‰€æœ‰ã€‚
+  (1)ã€ä½¿ç”¨è®¸å¯åŠé™åˆ¶
+  æ‚¨å¯ä»¥è‡ªç”±å¤åˆ¶ã€åˆ†å‘ã€ä¿®æ”¹æœ¬æºç ï¼Œä½†æ‚¨çš„ä¿®æ”¹åº”è¯¥åé¦ˆç»™ä½œè€…ï¼Œå¹¶å…è®¸ä½œè€…åœ¨å¿…è¦æ—¶ï¼Œ
+  åˆå¹¶åˆ°æœ¬é¡¹ç›®ä¸­ä»¥ä¾›ä½¿ç”¨ï¼Œåˆå¹¶åçš„æºç åŒæ ·éµå¾ªQDACç‰ˆæƒå£°æ˜é™åˆ¶ã€‚
+  æ‚¨çš„äº§å“çš„å…³äºä¸­ï¼Œåº”åŒ…å«ä»¥ä¸‹çš„ç‰ˆæœ¬å£°æ˜:
+  æœ¬äº§å“ä½¿ç”¨çš„JSONè§£æå™¨æ¥è‡ªQDACé¡¹ç›®ä¸­çš„QJSONï¼Œç‰ˆæƒå½’ä½œè€…æ‰€æœ‰ã€‚
+  (2)ã€æŠ€æœ¯æ”¯æŒ
+  æœ‰æŠ€æœ¯é—®é¢˜ï¼Œæ‚¨å¯ä»¥åŠ å…¥QDACå®˜æ–¹QQç¾¤250530692å…±åŒæ¢è®¨ã€‚
+  (3)ã€èµåŠ©
+  æ‚¨å¯ä»¥è‡ªç”±ä½¿ç”¨æœ¬æºç è€Œä¸éœ€è¦æ”¯ä»˜ä»»ä½•è´¹ç”¨ã€‚å¦‚æœæ‚¨è§‰å¾—æœ¬æºç å¯¹æ‚¨æœ‰å¸®åŠ©ï¼Œæ‚¨å¯ä»¥èµ
+  åŠ©æœ¬é¡¹ç›®ï¼ˆéå¼ºåˆ¶ï¼‰ï¼Œä»¥ä½¿ä½œè€…ä¸ä¸ºç”Ÿæ´»æ‰€è¿«ï¼Œæœ‰æ›´å¤šçš„ç²¾åŠ›ä¸ºæ‚¨å‘ˆç°æ›´å¥½çš„ä½œå“ï¼š
+  èµåŠ©æ–¹å¼ï¼š
+  æ”¯ä»˜å®ï¼š guansonghuan@sina.com å§“åï¼šç®¡è€¸å¯°
+  å»ºè®¾é“¶è¡Œï¼š
+  æˆ·åï¼šç®¡è€¸å¯°
+  è´¦å·ï¼š4367 4209 4324 0179 731
+  å¼€æˆ·è¡Œï¼šå»ºè®¾é“¶è¡Œé•¿æ˜¥å›¢é£å‚¨è“„æ‰€
 }
 
-{ ĞŞ¶©ÈÕÖ¾
+{ ä¿®è®¢æ—¥å¿—
+  2014.11.5
+  =========
+  * QStringAçš„Fromå‡½æ•°ä¿®æ”¹è¿”å›å€¼ç±»å‹å¹¶åŠ å…¥ä¸€ä¸ªé‡è½½
+  + QStringAåŠ å…¥Catå‡½æ•°
+  + CharCodeA/CharCodeU/CharCodeWæ¥è·å¾—æŒ‡å®šä½ç½®çš„å­—ç¬¦ç¼–ç å€¼
+
+  2014.9.26
+  =========
+  * å°†TThreadIdç±»å‹å®šä¹‰ç”±QWorkerç§»å…¥æœ¬å•å…ƒ
+  2014.9.11
+  =========
+  * ä¿®æ­£äº†LoadTextA/LoadTextWåŠ è½½å¸¦æœ‰BOMå¤´çš„ç©ºçš„Utf8æµæ—¶å‡ºé”™çš„é—®é¢˜
+  2014.8.20
+  =========
+  + StringReplaceWithWå‡½æ•°ï¼Œç”¨äºæ›¿æ¢ä¸€å—æ ‡ç­¾ä¸­çš„å†…å®¹ï¼ˆå¤©åœ°å¼¦ï¼‰
   2014.8.15
   =========
-  * ÇåÀí²¢ÑéÖ¤ÁËTQBytesCatHelperÒıÆğµÄ2007±àÒëÎŞ·¨Í¨¹ıµÄÎÊÌâ(Çï·çÆğÒİÒÔÁ¹±¨¸æ²¢ÑéÖ¤)
+  * æ¸…ç†å¹¶éªŒè¯äº†TQBytesCatHelperå¼•èµ·çš„2007ç¼–è¯‘æ— æ³•é€šè¿‡çš„é—®é¢˜(ç§‹é£èµ·é€¸ä»¥å‡‰æŠ¥å‘Šå¹¶éªŒè¯)
+  + PQStringAç±»å‹å®šä¹‰
 
   2014.8.14
   =========
-  * ĞŞÕıÁËTQBytesCatHelper.NeedSizeº¯ÊıÔÚDelphi2007ÏÂÎŞ·¨±àÒëµÄÎÊÌâ(Òô¶ùĞ¡°×±¨¸æ²¢Ìá¹©ĞŞ¸Ä)
+  * ä¿®æ­£äº†TQBytesCatHelper.NeedSizeå‡½æ•°åœ¨Delphi2007ä¸‹æ— æ³•ç¼–è¯‘çš„é—®é¢˜(éŸ³å„¿å°ç™½æŠ¥å‘Šå¹¶æä¾›ä¿®æ”¹)
   2014.8.5
   ========
-  * BinToHex¼ÓÈëALowerCase²ÎÊı£¬ÒÔÖ§³ÖÊ¹ÓÃĞ¡Ğ´µÄÊ®Áù½øÖÆ±íÊ¾·½Ê½
+  * BinToHexåŠ å…¥ALowerCaseå‚æ•°ï¼Œä»¥æ”¯æŒä½¿ç”¨å°å†™çš„åå…­è¿›åˆ¶è¡¨ç¤ºæ–¹å¼
   2014.8.1
   =========
-  + ĞÂÔöº¯ÊıSameCharsA/U/W¼ÆËãÏàÍ¬µÄ×Ö·ûÊı£¬EndWithA/U/WÅĞ¶ÏÊÇ·ûÒÔÖ¸¶¨µÄ×Ö·û´®½áÎ²
+  + æ–°å¢å‡½æ•°SameCharsA/U/Wè®¡ç®—ç›¸åŒçš„å­—ç¬¦æ•°ï¼ŒEndWithA/U/Wåˆ¤æ–­æ˜¯ç¬¦ä»¥æŒ‡å®šçš„å­—ç¬¦ä¸²ç»“å°¾
   2014.7.17
   =========
-  + ĞÂÔöBinaryCmpº¯Êı£¬ÓÃÓÚµÈ¼ÛÓÚCÖĞµÄmemcmpº¯Êı
+  + æ–°å¢BinaryCmpå‡½æ•°ï¼Œç”¨äºç­‰ä»·äºCä¸­çš„memcmpå‡½æ•°
   2014.7.16
   =========
-  + ĞÂÔöMemScanº¯ÊıÓÃÓÚÔÚÖ¸¶¨µÄÄÚ´æÇøÓòÖĞ²éÕÒÖ¸¶¨µÄ×Ö½ÚĞòÁĞ
+  + æ–°å¢MemScanå‡½æ•°ç”¨äºåœ¨æŒ‡å®šçš„å†…å­˜åŒºåŸŸä¸­æŸ¥æ‰¾æŒ‡å®šçš„å­—èŠ‚åºåˆ—
   2014.7.12
   =========
-  * ĞŞÕıÁËDecodeLineUÖĞµİ¹éµ÷ÓÃ×Ô¼ºµÄ´íÎó(Òô¶ùĞ¡°×±¨¸æ)
-  * ĞŞÕıÁËCharCountU¼ì²é×Ö·û¿í¶ÈÊ±¶ÔË«×Ö½ÚUtf8±àÂëµÄ¼ì²â´íÎó
+  * ä¿®æ­£äº†DecodeLineUä¸­é€’å½’è°ƒç”¨è‡ªå·±çš„é”™è¯¯(éŸ³å„¿å°ç™½æŠ¥å‘Š)
+  * ä¿®æ­£äº†CharCountUæ£€æŸ¥å­—ç¬¦å®½åº¦æ—¶å¯¹åŒå­—èŠ‚Utf8ç¼–ç çš„æ£€æµ‹é”™è¯¯
   2014.7.10
   =========
-  + ĞÂÔöÒÔÏÂº¯Êı£ºStringReplicateW,NameOfW,ValueOfW,IndexOfNameW,IndexOfValueW
+  + æ–°å¢ä»¥ä¸‹å‡½æ•°ï¼šStringReplicateW,NameOfW,ValueOfW,IndexOfNameW,IndexOfValueW
 
   2014.6.26
   =========
-  * ¼ÓÈëHPPEMITÄ¬ÈÏÁ´½Ó±¾µ¥Ôª(Âó×ÓÖÙ·Ê ½¨Òé)
+  * åŠ å…¥HPPEMITé»˜è®¤é“¾æ¥æœ¬å•å…ƒ(éº¦å­ä»²è‚¥ å»ºè®®)
   2014.6.21
   ==========
-  * ĞŞÕıÁËC++ BuilderÖĞ±àÒëµÄÎÊÌâ
+  * ä¿®æ­£äº†C++ Builderä¸­ç¼–è¯‘çš„é—®é¢˜
   2014.6.19
   ==========
-  * ĞŞÕıÁËQuotedStr¶ÔÓÚ³¤¶ÈÎª0µÄ×Ö·û´®±àÂë³ö´íµÄÎÊÌâ
+  * ä¿®æ­£äº†QuotedStrå¯¹äºé•¿åº¦ä¸º0çš„å­—ç¬¦ä¸²ç¼–ç å‡ºé”™çš„é—®é¢˜
 }
 uses classes, sysutils{$IFDEF UNICODE}, rtti{$ENDIF}
 {$IFDEF POSIX}
@@ -77,7 +93,11 @@ type
 {$ENDIF UNICODE}
 {$IF RTLVersion<25}
   IntPtr = Integer;
+  IntUPtr = Cardinal;
 {$IFEND IntPtr}
+{$IF RTLVersion<22}
+  TThreadId = Longword;
+{$IFEND}
   QCharA = Byte;
   QCharW = WideChar;
   PQCharA = ^QCharA;
@@ -86,15 +106,21 @@ type
   PQCharW = PWideChar;
   PPQCharW = ^PQCharW;
   PQStringW = ^QStringW;
-  TTextEncoding = (teUnknown, { Î´ÖªµÄ±àÂë }
-    teAuto, { ×Ô¶¯¼ì²â }
-    teAnsi, { Ansi±àÂë }
-    teUnicode16LE, { Unicode LE ±àÂë }
-    teUnicode16BE, { Unicode BE ±àÂë }
-    teUTF8 { UTF8±àÂë }
+  TTextEncoding = (teUnknown, { æœªçŸ¥çš„ç¼–ç  }
+    teAuto, { è‡ªåŠ¨æ£€æµ‹ }
+    teAnsi, { Ansiç¼–ç  }
+    teUnicode16LE, { Unicode LE ç¼–ç  }
+    teUnicode16BE, { Unicode BE ç¼–ç  }
+    teUTF8 { UTF8ç¼–ç  }
     );
+{$HPPEMIT '#define DELPHI_ANON(AType,Code,AVar) \'}
+{$HPPEMIT '  class AType##AVar:public TCppInterfacedObject<AType>\'}
+(*$HPPEMIT '  {\'*)
+{$HPPEMIT '  public:\'}
+{$HPPEMIT '    void __fastcall Invoke##Code\'}
+(*$HPPEMIT '  } *AVar=new AType##AVar'*)
 
-  // ´ÓA½áÎ²µÄÎªAnsi±àÂëÖ§³ÖµÄº¯Êı£¬ÒÔU½áÎ²µÄÊÇUtf8±àÂëÖ§³ÖµÄº¯Êı£¬ÒÔW½áÎ²µÄÎªUCS2
+  // ä»Aç»“å°¾çš„ä¸ºAnsiç¼–ç æ”¯æŒçš„å‡½æ•°ï¼Œä»¥Uç»“å°¾çš„æ˜¯Utf8ç¼–ç æ”¯æŒçš„å‡½æ•°ï¼Œä»¥Wç»“å°¾çš„ä¸ºUCS2
   QStringA = record
   private
     FValue: TBytes;
@@ -110,20 +136,30 @@ type
     class operator Implicit(const ABytes: TBytes): QStringA;
     class operator Implicit(const S: QStringA): QStringW;
     class operator Implicit(const S: PQCharA): QStringA;
-    // ×Ö·û´®±È½Ï
-    procedure From(p: PQCharA; AOffset, ALen: Integer);
+{$IFNDEF NEXTGEN}
+    class operator Implicit(const S: AnsiString): QStringA;
+    class operator Implicit(const S: QStringA): AnsiString;
+{$ENDIF}
+    // å­—ç¬¦ä¸²æ¯”è¾ƒ
+    function From(p: PQCharA; AOffset, ALen: Integer): PQStringA; overload;
+    function From(const S: QStringA; AOffset: Integer = 0): PQStringA; overload;
+    function Cat(p: PQCharA; ALen: Integer): PQStringA; overload;
+    function Cat(const S: QStringA): PQStringA; overload;
     property Chars[AIndex: Integer]: QCharA read GetChars
       write SetChars; default;
     property Length: Integer read GetLength write SetLength;
     property IsUtf8: Boolean read GetIsUtf8;
   end;
 
-  // ×Ö·û´®Æ´½ÓÀà
+  // å­—ç¬¦ä¸²æ‹¼æ¥ç±»
   TQStringCatHelperW = class
   private
     FValue: array of QCharW;
     FStart, FDest: PQCharW;
     FBlockSize: Integer;
+    {$IFDEF DEBUG}
+    FAllocTimes: Integer;
+    {$ENDIF}
     FSize: Integer;
     function GetValue: QStringW;
     function GetPosition: Integer;
@@ -216,12 +252,12 @@ type
     function Get: Pointer;
   end;
 
-  // UTF8±àÂëÓëUnicode±àÂë×ª»»º¯Êı£¬Ê¹ÓÃ×Ô¼ºµÄÊµÏÖ
+  // UTF8ç¼–ç ä¸Unicodeç¼–ç è½¬æ¢å‡½æ•°ï¼Œä½¿ç”¨è‡ªå·±çš„å®ç°
 function Utf8Decode(p: PQCharA; l: Integer): QStringW; overload;
 function Utf8Decode(const p: QStringA): QStringW; overload;
 function Utf8Encode(p: PQCharW; l: Integer): QStringA; overload;
 function Utf8Encode(const p: QStringW): QStringA; overload;
-// Ansi±àÂëÓëUnicode±àÂë×ª»»º¯Êı£¬Ê¹ÓÃÏµÍ³µÄTEncodingÊµÏÖ
+// Ansiç¼–ç ä¸Unicodeç¼–ç è½¬æ¢å‡½æ•°ï¼Œä½¿ç”¨ç³»ç»Ÿçš„TEncodingå®ç°
 function AnsiEncode(p: PQCharW; l: Integer): QStringA; overload;
 function AnsiEncode(const p: QStringW): QStringA; overload;
 function AnsiDecode(p: PQCharA; l: Integer): QStringW; overload;
@@ -230,15 +266,18 @@ function AnsiDecode(const p: QStringA): QStringW; overload;
 function CNSpellChars(S: QStringA; AIgnoreEnChars: Boolean): QStringW; overload;
 function CNSpellChars(S: QStringW; AIgnoreEnChars: Boolean): QStringW; overload;
 
-// ¼ÆËãµ±Ç°×Ö·ûµÄ³¤¶È
+// è®¡ç®—å½“å‰å­—ç¬¦çš„é•¿åº¦
 function CharSizeA(c: PQCharA): Integer;
 function CharSizeU(c: PQCharA): Integer;
 function CharSizeW(c: PQCharW): Integer;
-// ¼ÆËã×Ö·ûÊıº¯Êı£¬CharCountWÖØĞ´ÒÔ°üÀ¨UCS2À©Õ¹Çø×Ö·û´¦Àí
+// è®¡ç®—å­—ç¬¦æ•°å‡½æ•°ï¼ŒCharCountWé‡å†™ä»¥åŒ…æ‹¬UCS2æ‰©å±•åŒºå­—ç¬¦å¤„ç†
 function CharCountA(const source: QStringA): Integer;
 function CharCountW(const S: QStringW): Integer;
 function CharCountU(const source: QStringA): Integer;
-// ¼ì²é×Ö·ûÊÇ·ñÔÚÖ¸¶¨µÄÁĞ±íÖĞ
+function CharCodeA(c: PQCharA): Cardinal;
+function CharCodeU(c: PQCharA): Cardinal;
+function CharCodeW(c: PQCharW): Cardinal;
+// æ£€æŸ¥å­—ç¬¦æ˜¯å¦åœ¨æŒ‡å®šçš„åˆ—è¡¨ä¸­
 function CharInA(const c: PQCharA; const list: array of QCharA;
   ACharLen: PInteger = nil): Boolean;
 function CharInW(const c: PQCharW; const list: array of QCharW;
@@ -248,16 +287,16 @@ function CharInW(const c, list: PQCharW; ACharLen: PInteger = nil)
 function CharInU(const c: PQCharA; const list: array of QCharA;
   ACharLen: PInteger = nil): Boolean;
 
-// ¼ì²éÊÇ·ñÊÇ¿Õ°××Ö·û
+// æ£€æŸ¥æ˜¯å¦æ˜¯ç©ºç™½å­—ç¬¦
 function IsSpaceA(const c: PQCharA; ASpaceSize: PInteger = nil): Boolean;
 function IsSpaceW(const c: PQCharW; ASpaceSize: PInteger = nil): Boolean;
 function IsSpaceU(const c: PQCharA; ASpaceSize: PInteger = nil): Boolean;
 
-// È«½Ç°ë½Ç×ª»»
+// å…¨è§’åŠè§’è½¬æ¢
 function CNFullToHalf(const S: QStringW): QStringW;
 function CNHalfToFull(const S: QStringW): QStringW;
 
-// ÒıºÅ´¦Àí
+// å¼•å·å¤„ç†
 function QuotedStrA(const S: QStringA; const AQuoter: QCharA = $27): QStringA;
 function QuotedStrW(const S: QStringW; const AQuoter: QCharW = #$27): QStringW;
 function SQLQuoted(const S: QStringW): QStringW;
@@ -265,22 +304,22 @@ function DequotedStrA(const S: QStringA; const AQuoter: QCharA = $27): QStringA;
 function DequotedStrW(const S: QStringW; const AQuoter: QCharW = #$27)
   : QStringW;
 
-// Ìø¹ıÁĞ±íÖĞµÄ×Ö·û
+// è·³è¿‡åˆ—è¡¨ä¸­çš„å­—ç¬¦
 function SkipCharA(var p: PQCharA; const list: array of QCharA): Integer;
 function SkipCharU(var p: PQCharA; const list: array of QCharA): Integer;
 function SkipCharW(var p: PQCharW; const list: array of QCharA)
   : Integer; overload;
 function SkipCharW(var p: PQCharW; const list: PQCharW): Integer; overload;
 
-// Ìø¹ı¿Õ°××Ö·û£¬¶ÔÓÚ Ansi±àÂë£¬Ìø¹ıµÄÊÇ#9#10#13#161#161£¬¶ÔÓÚUCS±àÂë£¬Ìø¹ıµÄÊÇ#9#10#13#$3000
+// è·³è¿‡ç©ºç™½å­—ç¬¦ï¼Œå¯¹äº Ansiç¼–ç ï¼Œè·³è¿‡çš„æ˜¯#9#10#13#161#161ï¼Œå¯¹äºUCSç¼–ç ï¼Œè·³è¿‡çš„æ˜¯#9#10#13#$3000
 function SkipSpaceA(var p: PQCharA): Integer;
 function SkipSpaceU(var p: PQCharA): Integer;
 function SkipSpaceW(var p: PQCharW): Integer;
-// Ìø¹ıÒ»ĞĞ,ÒÔ#10ÎªĞĞ½áÎ²
+// è·³è¿‡ä¸€è¡Œ,ä»¥#10ä¸ºè¡Œç»“å°¾
 function SkipLineA(var p: PQCharA): Integer;
 function SkipLineU(var p: PQCharA): Integer;
 function SkipLineW(var p: PQCharW): Integer;
-// Ìø¹ıÖ±½ÓÓöµ½Ö¸¶¨µÄ×Ö·û
+// è·³è¿‡ç›´æ¥é‡åˆ°æŒ‡å®šçš„å­—ç¬¦
 function SkipUntilA(var p: PQCharA; AExpects: array of QCharA;
   AQuoter: QCharA = 0): Integer;
 function SkipUntilU(var p: PQCharA; AExpects: array of QCharA;
@@ -289,12 +328,12 @@ function SkipUntilW(var p: PQCharW; AExpects: array of QCharW;
   AQuoter: QCharW = #0): Integer; overload;
 function SkipUntilW(var p: PQCharW; AExpects: PQCharW; AQuoter: QCharW = #0)
   : Integer; overload;
-// ²éÕÒ×Ö·ûËùÔÚĞĞÁĞºÅ£¬·µ»ØĞĞµÄÆğÊ¼µØÖ·
+// æŸ¥æ‰¾å­—ç¬¦æ‰€åœ¨è¡Œåˆ—å·ï¼Œè¿”å›è¡Œçš„èµ·å§‹åœ°å€
 function StrPosA(Start, Current: PQCharA; var ACol, ARow: Integer): PQCharA;
 function StrPosU(Start, Current: PQCharA; var ACol, ARow: Integer): PQCharA;
 function StrPosW(Start, Current: PQCharW; var ACol, ARow: Integer): PQCharW;
 
-// ×Ö·û´®·Ö½â
+// å­—ç¬¦ä¸²åˆ†è§£
 function DecodeTokenA(var p: PQCharA; ADelimiters: array of QCharA;
   AQuoter: QCharA; AIgnoreSpace: Boolean): QStringA;
 function DecodeTokenU(var p: PQCharA; ADelimiters: array of QCharA;
@@ -314,12 +353,12 @@ function StrBetween(var S: PQCharW; AStartTag, AEndTag: QStringW;
 function TokenWithIndex(var S: PQCharW; AIndex: Integer; ADelimiters: PQCharW;
   AQuoter: QCharW; AIgnoreSapce: Boolean): QStringW;
 
-// »ñÈ¡Ò»ĞĞ
+// è·å–ä¸€è¡Œ
 function DecodeLineA(var p: PQCharA; ASkipEmpty: Boolean = True): QStringA;
 function DecodeLineU(var p: PQCharA; ASkipEmpty: Boolean = True): QStringA;
 function DecodeLineW(var p: PQCharW; ASkipEmpty: Boolean = True): QStringW;
 
-// ÅĞ¶ÏÊÇ·ñÊÇÒÔÖ¸¶¨µÄ×Ö·û´®¿ªÊ¼
+// åˆ¤æ–­æ˜¯å¦æ˜¯ä»¥æŒ‡å®šçš„å­—ç¬¦ä¸²å¼€å§‹
 function StartWithA(S, startby: PQCharA; AIgnoreCase: Boolean): Boolean;
 function StartWithU(S, startby: PQCharA; AIgnoreCase: Boolean): Boolean;
 function StartWithW(S, startby: PQCharW; AIgnoreCase: Boolean): Boolean;
@@ -329,7 +368,7 @@ function EndWithW(const S, endby: QStringW; AIgnoreCase: Boolean): Boolean;
 function SameCharsA(s1, s2: PQCharA; AIgnoreCase: Boolean): Integer;
 function SameCharsU(s1, s2: PQCharA; AIgnoreCase: Boolean): Integer;
 function SameCharsW(s1, s2: PQCharW; AIgnoreCase: Boolean): Integer;
-// ¼ÓÔØÎÄ±¾
+// åŠ è½½æ–‡æœ¬
 function LoadTextA(AFileName: String; AEncoding: TTextEncoding = teUnknown)
   : QStringA; overload;
 function LoadTextA(AStream: TStream; AEncoding: TTextEncoding = teUnknown)
@@ -343,7 +382,7 @@ function LoadTextW(AFileName: String; AEncoding: TTextEncoding = teUnknown)
 function LoadTextW(AStream: TStream; AEncoding: TTextEncoding = teUnknown)
   : QStringW; overload;
 
-// ±£´æÎÄ±¾
+// ä¿å­˜æ–‡æœ¬
 procedure SaveTextA(AFileName: String; const S: QStringA); overload;
 procedure SaveTextA(AStream: TStream; const S: QStringA); overload;
 procedure SaveTextU(AFileName: String; const S: QStringA;
@@ -357,7 +396,7 @@ procedure SaveTextW(AStream: TStream; const S: QStringW;
 procedure SaveTextWBE(AStream: TStream; const S: QStringW;
   AWriteBom: Boolean = True); overload;
 
-// ×Ö·û´®ÖĞ²éÕÒ×Ó´®£¬UTF8Ö±½ÓÊ¹ÓÃAnsi°æ±¾¼´¿É
+// å­—ç¬¦ä¸²ä¸­æŸ¥æ‰¾å­ä¸²ï¼ŒUTF8ç›´æ¥ä½¿ç”¨Ansiç‰ˆæœ¬å³å¯
 function StrStrA(s1, s2: PQCharA): PQCharA;
 function StrIStrA(s1, s2: PQCharA): PQCharA;
 function StrStrU(s1, s2: PQCharA): PQCharA;
@@ -367,6 +406,7 @@ function StrIStrW(s1, s2: PQCharW): PQCharW;
 function StrDupX(const S: PQCharW; ACount: Integer): QStringW;
 function StrDupW(const S: PQCharW; AOffset: Integer = 0;
   const ACount: Integer = MaxInt): QStringW;
+function StrCmpA(const s1, s2: PQCharA; AIgnoreCase: Boolean): Integer;
 function StrCmpW(const s1, s2: PQCharW; AIgnoreCase: Boolean): Integer;
 function StrNCmpW(const s1, s2: PQCharW; AIgnoreCase: Boolean;
   ALength: Integer): Integer;
@@ -376,11 +416,24 @@ function HexChar(V: Byte): QCharW;
 function TryStrToGuid(const S: QStringW; var AGuid: TGuid): Boolean;
 function StringReplaceW(const S, Old, New: QStringW; AFlags: TReplaceFlags)
   : QStringW;
+/// <summary>ä½¿ç”¨æŒ‡å®šçš„å†…å®¹æ›¿æ¢AStartTagå’ŒEndTagä¹‹é—´çš„å†…å®¹</summary>
+/// <params>
+/// <param name="S">è¦æŸ¥æ‰¾æ›¿æ¢çš„å­—ç¬¦ä¸²</param>
+/// <param name="AStartTag">å¼€å§‹çš„æ ‡ç­¾åç§°</param>
+/// <param name="AEndTag">ç»“æŸçš„æ ‡ç­¾åç§°</param>
+/// <param name="AReplaced">æ›¿æ¢çš„ç»“æœ</param>
+/// <param name="AWithTag">æ˜¯å¦è¿åŒAStartTagå’ŒAEndTagæ ‡ç­¾ä¸€èµ·æ›¿æ¢æ‰</param>
+/// <param name="AIgnoreCase">æ¯”è¾ƒæ ‡ç­¾åç§°æ—¶æ˜¯å¦å¿½ç•¥å¤§å°</param>
+/// <param name="AMaxTimes">æœ€å¤§æ›¿æ¢æ¬¡æ•°ï¼Œé»˜è®¤ä¸º1</param>
+/// </params>
+/// <returns>è¿”å›æ›¿æ¢åçš„å†…å®¹</returns>
+function StringReplaceWithW(const S, AStartTag, AEndTag, AReplaced: QStringW;
+  AWithTag, AIgnoreCase: Boolean; AMaxTimes: Cardinal = 1): QStringW;
 function StringReplicateW(const S: QStringW; ACount: Integer): QStringW;
 function MemScan(S: Pointer; len_s: Integer; sub: Pointer;
   len_sub: Integer): Pointer;
 function BinaryCmp(const p1, p2: Pointer; len: Integer): Integer;
-// ÏÂÃæµÄº¯ÊıÖ»ÄÜUnicode°æ±¾£¬Ã»ÓĞAnsiºÍUTF-8°æ±¾£¬Èç¹ûĞèÒª£¬ÔÙ¼ÓÈë
+// ä¸‹é¢çš„å‡½æ•°åªèƒ½Unicodeç‰ˆæœ¬ï¼Œæ²¡æœ‰Ansiå’ŒUTF-8ç‰ˆæœ¬ï¼Œå¦‚æœéœ€è¦ï¼Œå†åŠ å…¥
 function NameOfW(const S: QStringW; ASpliter: QCharW): QStringW;
 function ValueOfW(const S: QStringW; ASpliter: QCharW): QStringW;
 function IndexOfNameW(AList: TStrings; const AName: QStringW;
@@ -388,13 +441,17 @@ function IndexOfNameW(AList: TStrings; const AName: QStringW;
 function IndexOfValueW(AList: TStrings; const AValue: QStringW;
   ASpliter: QCharW): Integer;
 function DeleteCharW(const ASource, ADeletes: QStringW): QStringW;
+function DeleteRightW(const S, ADelete: QStringW; AIgnoreCase: Boolean = False;
+  ACount: Integer = MaxInt): QStringW;
+function DeleteLeftW(const S, ADelete: QStringW; AIgnoreCase: Boolean = False;
+  ACount: Integer = MaxInt): QStringW;
 function ContainsCharW(const S, ACharList: QStringW): Boolean;
 function HtmlEscape(const S: QStringW): QStringW;
 function HtmlUnescape(const S: QStringW): QStringW;
 function HtmlTrimText(const S: QStringW): QStringW;
 function LeftStrCount(const S: QStringW; const sub: QStringW): Integer;
 function RightStrCount(const S: QStringW; const sub: QStringW): Integer;
-// ÏÂÃæÊÇÒ»Ğ©¸¨Öúº¯Êı
+// ä¸‹é¢æ˜¯ä¸€äº›è¾…åŠ©å‡½æ•°
 function ParseInt(var S: PQCharW; var ANum: Int64): Integer;
 function ParseHex(var p: PQCharW; var Value: Int64): Integer;
 function ParseNumeric(var S: PQCharW; var ANum: Extended): Boolean;
@@ -414,14 +471,16 @@ function ExchangeByteOrder(V: Single): Single; overload; inline;
 function ExchangeByteOrder(V: Double): Double; overload; inline;
 
 procedure FreeObject(AObject: TObject); inline;
-// Ô­×Ó²Ù×÷º¯Êı
+// åŸå­æ“ä½œå‡½æ•°
 function AtomicAnd(var Dest: Integer; const AMask: Integer): Integer;
 function AtomicOr(var Dest: Integer; const AMask: Integer): Integer;
 {$IF RTLVersion<26}
-// ÎªÓëXE6¼æÈİ£¬InterlockedCompareExchangeµÈ¼Û
+// ä¸ºä¸XE6å…¼å®¹ï¼ŒInterlockedCompareExchangeç­‰ä»·
 function AtomicCmpExchange(var Target: Integer; Value: Integer;
-  Comparand: Integer): Integer; inline;
-// µÈ¼ÛÓÚInterlockedExchanged
+  Comparand: Integer): Integer; inline; overload;
+function AtomicCmpExchange(var Target: Pointer; Value: Pointer;
+  Comparand: Pointer): Pointer; inline; overload;
+// ç­‰ä»·äºInterlockedExchanged
 function AtomicExchange(var Target: Integer; Value: Integer): Integer; inline;
 function AtomicIncrement(var Target: Integer): Integer; inline;
 function AtomicDecrement(var Target: Integer): Integer; inline;
@@ -433,7 +492,7 @@ function BinToHex(const ABytes: TBytes; ALowerCase: Boolean = False)
   : QStringW; overload;
 function HexToBin(const S: QStringW): TBytes; overload;
 procedure HexToBin(const S: QStringW; var AResult: TBytes); overload;
-// ¼ÆËãÖ¸¶¨ÄÚÈİµÄ¹şÏ£Öµ
+// è®¡ç®—æŒ‡å®šå†…å®¹çš„å“ˆå¸Œå€¼
 function HashOf(const p: Pointer; l: Integer): Cardinal;
 
 var
@@ -454,21 +513,22 @@ uses dateutils, math, variants
     ;
 
 resourcestring
-  SBadUnicodeChar = 'ÎŞĞ§µÄUnicode×Ö·û:%d';
-  SBadUtf8Char = 'ÎŞĞ§µÄUTF8×Ö·û:%d';
-  SOutOfIndex = 'Ë÷ÒıÔ½½ç£¬Öµ %d ²»ÔÚ[%d..%d]µÄ·¶Î§ÄÚ¡£';
-  SDayName = 'Ìì';
-  SHourName = 'Ğ¡Ê±';
-  SMinuteName = '·ÖÖÓ';
-  SSecondName = 'Ãë';
+  SBadUnicodeChar = 'æ— æ•ˆçš„Unicodeå­—ç¬¦:%d';
+  SBadUtf8Char = 'æ— æ•ˆçš„UTF8å­—ç¬¦:%d';
+  SOutOfIndex = 'ç´¢å¼•è¶Šç•Œï¼Œå€¼ %d ä¸åœ¨[%d..%d]çš„èŒƒå›´å†…ã€‚';
+  SDayName = 'å¤©';
+  SHourName = 'å°æ—¶';
+  SMinuteName = 'åˆ†é’Ÿ';
+  SSecondName = 'ç§’';
 
 type
   TGBKCharSpell = record
     SpellChar: QCharW;
     StartChar, EndChar: Word;
   end;
-{$IFDEF UNICODE}
 
+  TStrStrFunction = function(s1, s2: PQCharW): PQCharW;
+{$IFDEF UNICODE}
   TIntArray = TArray<Integer>;
 {$ELSE}
   TIntArray = array of Integer;
@@ -480,7 +540,7 @@ type
 {$ENDIF}
 
 var
-  // GBKºº×ÖÆ´ÒôÊ××ÖÄ¸±í
+  // GBKæ±‰å­—æ‹¼éŸ³é¦–å­—æ¯è¡¨
   GBKSpells: array [0 .. 22] of TGBKCharSpell = (
     (
       SpellChar: 'A'; StartChar: $B0A1; EndChar: $B0C4;
@@ -545,19 +605,30 @@ const
     QCharW(247), '&divide;', QCharW(248), '&oslash;', QCharW(249), '&ugrave;',
     QCharW(250), '&uacute;', QCharW(251), '&ucirc;', QCharW(252), '&uuml;',
     QCharW(253), '&yacute;', QCharW(254), '&thorn;', QCharW(255), '&yuml;');
-  // QStringº¯Êı
+  // QStringå‡½æ•°
 
 function Utf8Decode(const p: QStringA): QStringW;
 begin
 if p.IsUtf8 then
   Result := Utf8Decode(PQCharA(p), p.Length)
+else if p.Length > 0 then
+  Result := AnsiDecode(p)
 else
-  Result := AnsiDecode(p);
+  SetLength(Result, 0);
 end;
 
 function Utf8Encode(const p: QStringW): QStringA;
+var
+  l: NativeInt;
 begin
-Result := Utf8Encode(PQCharW(p), Length(p));
+l := Length(p);
+if l > 0 then
+  Result := Utf8Encode(PQCharW(p), l)
+else
+  begin
+  Result.Length := 0;
+  Result.FValue[0] := 1;
+  end;
 end;
 
 function Utf8Decode(p: PQCharA; l: Integer): QStringW;
@@ -676,7 +747,10 @@ var
   c: Cardinal;
 begin
 if p = nil then
-  Result.Length := 0
+  begin
+  Result.Length := 0;
+  Result.FValue[0] := 1;
+  end
 else
   begin
   if l <= 0 then
@@ -686,7 +760,7 @@ else
       Inc(ps);
     l := ps - p;
     end;
-  Result.Length := l * 6; // UTF8Ã¿¸ö×Ö·û×î¶à6×Ö½Ú³¤,Ò»´ÎĞÔ·ÖÅä×ã¹»µÄ¿Õ¼ä
+  Result.Length := l * 6; // UTF8æ¯ä¸ªå­—ç¬¦æœ€å¤š6å­—èŠ‚é•¿,ä¸€æ¬¡æ€§åˆ†é…è¶³å¤Ÿçš„ç©ºé—´
   if l > 0 then
     begin
     Result.FValue[0] := 1;
@@ -697,7 +771,7 @@ else
       begin
       c := Cardinal(ps^);
       Inc(ps);
-      if (c >= $D800) and (c <= $DFFF) then // Unicode À©Õ¹Çø×Ö·û
+      if (c >= $D800) and (c <= $DFFF) then // Unicode æ‰©å±•åŒºå­—ç¬¦
         begin
         c := (c - $D800);
         if (ps^ >= #$DC00) and (ps^ <= #$DFFF) then
@@ -712,7 +786,7 @@ else
       Dec(l);
       if c = $0 then
         begin
-        if JavaFormatUtf8 then // °´ÕÕJava¸ñÊ½±àÂë£¬½«#$0×Ö·û±àÂëÎª#$C080
+        if JavaFormatUtf8 then // æŒ‰ç…§Javaæ ¼å¼ç¼–ç ï¼Œå°†#$0å­—ç¬¦ç¼–ç ä¸º#$C080
           begin
           pd^ := $C0;
           Inc(pd);
@@ -822,8 +896,14 @@ else
 end;
 
 function AnsiEncode(const p: QStringW): QStringA;
+var
+  l: NativeInt;
 begin
-Result := AnsiEncode(PQCharW(p), Length(p));
+l := Length(p);
+if l > 0 then
+  Result := AnsiEncode(PQCharW(p), l)
+else
+  Result.Length := 0;
 end;
 
 function AnsiDecode(p: PQCharA; l: Integer): QStringW;
@@ -861,12 +941,16 @@ function AnsiDecode(const p: QStringA): QStringW;
 begin
 if p.IsUtf8 then
   Result := Utf8Decode(p)
-else
+else if p.Length > 0 then
+  begin
 {$IFDEF MSWINDOWS}
   Result := AnsiDecode(PQCharA(p), p.Length);
 {$ELSE}
   Result := TEncoding.ANSI.GetString(p.FValue, 1, p.Length);
 {$ENDIF}
+  end
+else
+  SetLength(Result, 0);
 end;
 
 function CNSpellChars(S: QStringA; AIgnoreEnChars: Boolean): QStringW;
@@ -931,10 +1015,10 @@ end;
 
 function CharSizeA(c: PQCharA): Integer;
 begin
-{ GB18030,¼æÈİGBKºÍGB2312
-  µ¥×Ö½Ú£¬ÆäÖµ´Ó0µ½0x7F¡£
-  Ë«×Ö½Ú£¬µÚÒ»¸ö×Ö½ÚµÄÖµ´Ó0x81µ½0xFE£¬µÚ¶ş¸ö×Ö½ÚµÄÖµ´Ó0x40µ½0xFE£¨²»°üÀ¨0x7F£©¡£
-  ËÄ×Ö½Ú£¬µÚÒ»¸ö×Ö½ÚµÄÖµ´Ó0x81µ½0xFE£¬µÚ¶ş¸ö×Ö½ÚµÄÖµ´Ó0x30µ½0x39£¬µÚÈı¸ö×Ö½Ú´Ó0x81µ½0xFE£¬µÚËÄ¸ö×Ö½Ú´Ó0x30µ½0x39¡£
+{ GB18030,å…¼å®¹GBKå’ŒGB2312
+  å•å­—èŠ‚ï¼Œå…¶å€¼ä»0åˆ°0x7Fã€‚
+  åŒå­—èŠ‚ï¼Œç¬¬ä¸€ä¸ªå­—èŠ‚çš„å€¼ä»0x81åˆ°0xFEï¼Œç¬¬äºŒä¸ªå­—èŠ‚çš„å€¼ä»0x40åˆ°0xFEï¼ˆä¸åŒ…æ‹¬0x7Fï¼‰ã€‚
+  å››å­—èŠ‚ï¼Œç¬¬ä¸€ä¸ªå­—èŠ‚çš„å€¼ä»0x81åˆ°0xFEï¼Œç¬¬äºŒä¸ªå­—èŠ‚çš„å€¼ä»0x30åˆ°0x39ï¼Œç¬¬ä¸‰ä¸ªå­—èŠ‚ä»0x81åˆ°0xFEï¼Œç¬¬å››ä¸ªå­—èŠ‚ä»0x30åˆ°0x39ã€‚
 }
 {$IFDEF MSWINDOWS}
 if GetACP = 936 then
@@ -1009,6 +1093,92 @@ if (c[0] >= #$DB00) and (c[0] <= #$DBFF) and (c[1] >= #$DC00) and
   Result := 2
 else
   Result := 1;
+end;
+
+function CharCodeA(c: PQCharA): Cardinal;
+var
+  T: QStringA;
+begin
+T := AnsiDecode(c, CharSizeA(c));
+Result := CharCodeW(PQCharW(T));
+end;
+
+function CharCodeU(c: PQCharA): Cardinal;
+begin
+if (c^ and $80) <> 0 then
+  begin
+  if (c^ and $FC) = $FC then // 4000000+
+    begin
+    Result := (c^ and $03) shl 30;
+    Inc(c);
+    Result := Result or ((c^ and $3F) shl 24);
+    Inc(c);
+    Result := Result or ((c^ and $3F) shl 18);
+    Inc(c);
+    Result := Result or ((c^ and $3F) shl 12);
+    Inc(c);
+    Result := Result or ((c^ and $3F) shl 6);
+    Inc(c);
+    Result := Result or (c^ and $3F);
+    end
+  else if (c^ and $F8) = $F8 then // 200000-3FFFFFF
+    begin
+    Result := (c^ and $07) shl 24;
+    Inc(c);
+    Result := Result or ((c^ and $3F) shl 18);
+    Inc(c);
+    Result := Result or ((c^ and $3F) shl 12);
+    Inc(c);
+    Result := Result or ((c^ and $3F) shl 6);
+    Inc(c);
+    Result := Result or (c^ and $3F);
+    end
+  else if (c^ and $F0) = $F0 then // 10000-1FFFFF
+    begin
+    Result := (c^ and $0F) shr 18;
+    Inc(c);
+    Result := Result or ((c^ and $3F) shl 12);
+    Inc(c);
+    Result := Result or ((c^ and $3F) shl 6);
+    Inc(c);
+    Result := Result or (c^ and $3F);
+    end
+  else if (c^ and $E0) = $E0 then // 800-FFFF
+    begin
+    Result := (c^ and $1F) shl 12;
+    Inc(c);
+    Result := Result or ((c^ and $3F) shl 6);
+    Inc(c);
+    Result := Result or (c^ and $3F);
+    end
+  else if (c^ and $C0) = $C0 then // 80-7FF
+    begin
+    Result := (c^ and $3F) shl 6;
+    Inc(c);
+    Result := Result or (c^ and $3F);
+    end
+  else
+    raise Exception.Create(Format(SBadUtf8Char, [IntPtr(c^)]));
+  end
+else
+  Result := c^;
+end;
+
+function CharCodeW(c: PQCharW): Cardinal;
+begin
+if (c^ >= #$D800) and (c^ <= #$DFFF) then // Unicode æ‰©å±•åŒºå­—ç¬¦
+  begin
+  Result := (Ord(c^) - $D800);
+  Inc(c);
+  if (c^ >= #$DC00) and (c^ <= #$DFFF) then
+    begin
+    Result := $10000 + ((Result shl 10) + (Ord(c^) - $DC00));
+    end
+  else
+    Result := 0
+  end
+else
+  Result := Ord(c^);
 end;
 
 function CharCountA(const source: QStringA): Integer;
@@ -1293,7 +1463,7 @@ end;
 
 function IsSpaceU(const c: PQCharA; ASpaceSize: PInteger): Boolean;
 begin
-// È«½Ç¿Õ¸ñ$3000µÄUTF-8±àÂëÊÇ227,128,128
+// å…¨è§’ç©ºæ ¼$3000çš„UTF-8ç¼–ç æ˜¯227,128,128
 if c^ in [9, 10, 13, 32] then
   begin
   Result := True;
@@ -1324,7 +1494,7 @@ if l > 0 then
   pd := PWord(PQCharW(Result));
   while l > 0 do
     begin
-    if (p^ = $3000) then // È«½Ç¿Õ¸ñ'¡¡'
+    if (p^ = $3000) then // å…¨è§’ç©ºæ ¼'ã€€'
       pd^ := $20
     else if (p^ >= $FF01) and (p^ <= $FF5E) then
       pd^ := $21 + (p^ - $FF01)
@@ -1352,7 +1522,7 @@ if l > 0 then
   pd := PWord(PQCharW(Result));
   while l > 0 do
     begin
-    if p^ = $20 then // È«½Ç¿Õ¸ñ'¡¡'
+    if p^ = $20 then // å…¨è§’ç©ºæ ¼'ã€€'
       pd^ := $3000
     else if (p^ >= $21) and (p^ <= $7E) then
       pd^ := $FF01 + (p^ - $21)
@@ -1454,7 +1624,7 @@ if (S.Length > 0) and (S[0] = AQuoter) and (S[S.Length - 1] = AQuoter) then
         begin
         pd^ := AQuoter;
         end
-      else if IntPtr(p) < IntPtr(pe) then // ºóÃæ²»ÊÇµ¥ÒıºÅ,´íÎóµÄ×Ö·û´®£¬Ö±½Ó¿½±´ÄÚÈİ
+      else if IntPtr(p) < IntPtr(pe) then // åé¢ä¸æ˜¯å•å¼•å·,é”™è¯¯çš„å­—ç¬¦ä¸²ï¼Œç›´æ¥æ‹·è´å†…å®¹
         begin
         pd^ := AQuoter;
         Inc(pd);
@@ -1497,7 +1667,7 @@ if (Length(S) > 0) and (PQCharW(S)[0] = AQuoter) and
         begin
         pd^ := AQuoter;
         end
-      else if IntPtr(p) < IntPtr(pe) then // ºóÃæ²»ÊÇµ¥ÒıºÅ,´íÎóµÄ×Ö·û´®£¬Ö±½Ó¿½±´ÄÚÈİ
+      else if IntPtr(p) < IntPtr(pe) then // åé¢ä¸æ˜¯å•å¼•å·,é”™è¯¯çš„å­—ç¬¦ä¸²ï¼Œç›´æ¥æ‹·è´å†…å®¹
         begin
         pd^ := AQuoter;
         Inc(pd);
@@ -1699,7 +1869,7 @@ while p^ <> #0 do
 Result := IntPtr(p) - IntPtr(ps);
 end;
 
-// Ìø¹ıÒ»ĞĞ,ÒÔ#10ÎªĞĞ½áÎ²
+// è·³è¿‡ä¸€è¡Œ,ä»¥#10ä¸ºè¡Œç»“å°¾
 function SkipLineA(var p: PQCharA): Integer;
 var
   ps: PQCharA;
@@ -1818,7 +1988,7 @@ if AIgnoreSpace then
 S := p;
 while p^ <> 0 do
   begin
-  if p^ = AQuoter then // ÒıÓÃµÄÄÚÈİ²»²ğ·Ö
+  if p^ = AQuoter then // å¼•ç”¨çš„å†…å®¹ä¸æ‹†åˆ†
     begin
     Inc(p);
     while p^ <> 0 do
@@ -1843,7 +2013,7 @@ while p^ <> 0 do
     end
   else if CharInA(p, ADelimiters, @l) then
     Break
-  else // \",\',"",''·Ö±ğ½âÎö×ªÒå
+  else // \",\',"",''åˆ†åˆ«è§£æè½¬ä¹‰
     Inc(p);
   end;
 l := IntPtr(p) - IntPtr(S);
@@ -1864,7 +2034,7 @@ if AIgnoreSpace then
 S := p;
 while p^ <> 0 do
   begin
-  if p^ = AQuoter then // ÒıÓÃµÄÄÚÈİ²»²ğ·Ö
+  if p^ = AQuoter then // å¼•ç”¨çš„å†…å®¹ä¸æ‹†åˆ†
     begin
     Inc(p);
     while p^ <> 0 do
@@ -1889,7 +2059,7 @@ while p^ <> 0 do
     end
   else if CharInU(p, ADelimiters, @l) then
     Break
-  else // \",\',"",''·Ö±ğ½âÎö×ªÒå
+  else // \",\',"",''åˆ†åˆ«è§£æè½¬ä¹‰
     Inc(p);
   end;
 l := IntPtr(p) - IntPtr(S);
@@ -1910,7 +2080,7 @@ if AIgnoreSpace then
 S := p;
 while p^ <> #0 do
   begin
-  if p^ = AQuoter then // ÒıÓÃµÄÄÚÈİ²»²ğ·Ö
+  if p^ = AQuoter then // å¼•ç”¨çš„å†…å®¹ä¸æ‹†åˆ†
     begin
     Inc(p);
     while p^ <> #0 do
@@ -1935,7 +2105,7 @@ while p^ <> #0 do
     end
   else if CharInW(p, ADelimiters, @l) then
     Break
-  else // \",\',"",''·Ö±ğ½âÎö×ªÒå
+  else // \",\',"",''åˆ†åˆ«è§£æè½¬ä¹‰
     Inc(p);
   end;
 l := p - S;
@@ -1956,7 +2126,7 @@ if AIgnoreSpace then
 S := p;
 while p^ <> #0 do
   begin
-  if p^ = AQuoter then // ÒıÓÃµÄÄÚÈİ²»²ğ·Ö
+  if p^ = AQuoter then // å¼•ç”¨çš„å†…å®¹ä¸æ‹†åˆ†
     begin
     Inc(p);
     while p^ <> #0 do
@@ -1981,7 +2151,7 @@ while p^ <> #0 do
     end
   else if CharInW(p, ADelimiters, @l) then
     Break
-  else // \",\',"",''·Ö±ğ½âÎö×ªÒå
+  else // \",\',"",''åˆ†åˆ«è§£æè½¬ä¹‰
     Inc(p);
   end;
 l := p - S;
@@ -2127,7 +2297,7 @@ else if AMaxCount > 0 then
         Inc(p);
         if (p^ >= #$DC00) and (p^ <= #$DFFF) then
           Inc(p);
-        // else ÎŞĞ§µÄÀ©Õ¹Çø×Ö·û£¬ÈÔÈ»Ñ­»·±£Áô
+        // else æ— æ•ˆçš„æ‰©å±•åŒºå­—ç¬¦ï¼Œä»ç„¶å¾ªç¯ä¿ç•™
         end
       else
         Inc(p);
@@ -2169,7 +2339,7 @@ else if AMaxCount > 0 then
         Dec(p);
         if (p^ >= #$DB00) and (p^ <= #$DBFF) then
           Dec(p)
-          // else ÎŞĞ§µÄÀ©Õ¹Çø×Ö·û£¬ÈÔÈ»Ñ­»·±£Áô
+          // else æ— æ•ˆçš„æ‰©å±•åŒºå­—ç¬¦ï¼Œä»ç„¶å¾ªç¯ä¿ç•™
         end
       else
         Dec(p);
@@ -2410,7 +2580,7 @@ while p^ <> #0 do
   else
     Inc(p, CharSizeW(p));
   end;
-Result := IntPtr(p) - IntPtr(ps);
+Result := (IntPtr(p) - IntPtr(ps)) shr 1;
 end;
 
 function CharUpperA(c: QCharA): QCharA;
@@ -2453,17 +2623,23 @@ end;
 
 function StartWithW(S, startby: PQCharW; AIgnoreCase: Boolean): Boolean;
 begin
-while (S^ <> #0) and (startby^ <> #0) do
+if AIgnoreCase then
   begin
-  if AIgnoreCase then
+  while (S^ <> #0) and (startby^ <> #0) do
     begin
     if CharUpperW(S^) <> CharUpperW(startby^) then
       Break;
-    end
-  else if S^ <> startby^ then
-    Break;
-  Inc(S);
-  Inc(startby);
+    Inc(S);
+    Inc(startby);
+    end;
+  end
+else
+  begin
+  while (S^ <> #0) and (S^ = startby^) do
+    begin
+    Inc(S);
+    Inc(startby);
+    end;
   end;
 Result := (startby^ = #0);
 end;
@@ -2645,21 +2821,21 @@ if l >= 2 then
   else if l >= 3 then
     begin
     if (pAnsi^ = $EF) and (PByte(IntPtr(pAnsi) + 1)^ = $BB) and
-      (PByte(IntPtr(pAnsi) + 2)^ = $BF) then // UTF-8±àÂë
+      (PByte(IntPtr(pAnsi) + 2)^ = $BF) then // UTF-8ç¼–ç 
       Result := teUTF8
-    else // ¼ì²â×Ö·ûÖĞÊÇ·ñÓĞ·ûºÏUFT-8±àÂë¹æÔòµÄ×Ö·û£¬11...
+    else // æ£€æµ‹å­—ç¬¦ä¸­æ˜¯å¦æœ‰ç¬¦åˆUFT-8ç¼–ç è§„åˆ™çš„å­—ç¬¦ï¼Œ11...
       begin
       b := False;
-      Result := teUTF8; // ¼ÙÉèÎÄ¼şÎªUTF8±àÂë£¬È»ºó¼ì²âÊÇ·ñÓĞ²»·ûºÏUTF-8±àÂëµÄĞòÁĞ
+      Result := teUTF8; // å‡è®¾æ–‡ä»¶ä¸ºUTF8ç¼–ç ï¼Œç„¶åæ£€æµ‹æ˜¯å¦æœ‰ä¸ç¬¦åˆUTF-8ç¼–ç çš„åºåˆ—
       I := 0;
       Dec(l, 2);
       while I <= l do
         begin
-        if (pAnsi^ and $80) <> 0 then // ¸ßÎ»Îª1
+        if (pAnsi^ and $80) <> 0 then // é«˜ä½ä¸º1
           begin
           if IsUtf8Order(AUtf8CharSize) then
             begin
-            if AUtf8CharSize > 2 then // ³öÏÖ´óÓÚ2¸ö×Ö½Ú³¤¶ÈµÄUTF8ĞòÁĞ£¬99%¾ÍÊÇUTF-8ÁË£¬²»ÔÙÅĞ¶Ï
+            if AUtf8CharSize > 2 then // å‡ºç°å¤§äº2ä¸ªå­—èŠ‚é•¿åº¦çš„UTF8åºåˆ—ï¼Œ99%å°±æ˜¯UTF-8äº†ï¼Œä¸å†åˆ¤æ–­
               Break;
             Inc(pAnsi, AUtf8CharSize);
             Inc(I, AUtf8CharSize);
@@ -2672,7 +2848,7 @@ if l >= 2 then
           end
         else
           begin
-          if pAnsi^ = 0 then // 00 xx (xx<128) ¸ßÎ»ÔÚÇ°£¬ÊÇBE±àÂë
+          if pAnsi^ = 0 then // 00 xx (xx<128) é«˜ä½åœ¨å‰ï¼Œæ˜¯BEç¼–ç 
             begin
             if PByte(IntPtr(pAnsi) + 1)^ < 128 then
               begin
@@ -2680,7 +2856,7 @@ if l >= 2 then
               Break;
               end;
             end
-          else if PByte(IntPtr(pAnsi) + 1)^ = 0 then // xx 00 µÍÎ»ÔÚÇ°£¬ÊÇLE±àÂë
+          else if PByte(IntPtr(pAnsi) + 1)^ = 0 then // xx 00 ä½ä½åœ¨å‰ï¼Œæ˜¯LEç¼–ç 
             begin
             Result := teUnicode16LE;
             Break;
@@ -2825,7 +3001,7 @@ if ASize > 0 then
         ABomExists := (ABuffer[1] = $FE) and (ABuffer[1] = $FF);
       teUTF8:
         begin
-        if ASize > 3 then
+        if ASize >= 3 then
           ABomExists := (ABuffer[0] = $EF) and (ABuffer[1] = $BB) and
             (ABuffer[2] = $BF)
         else
@@ -2840,7 +3016,12 @@ if ASize > 0 then
   else if AEncoding = teUTF8 then
     begin
     if ABomExists then
-      Result := AnsiEncode(Utf8Decode(@ABuffer[3], ASize - 3))
+      begin
+      if ASize > 3 then
+        Result := AnsiEncode(Utf8Decode(@ABuffer[3], ASize - 3))
+      else
+        Result.Length := 0;
+      end
     else
       Result := AnsiEncode(Utf8Decode(@ABuffer[0], ASize));
     end
@@ -2968,7 +3149,7 @@ if ASize > 0 then
         ABomExists := (ABuffer[1] = $FE) and (ABuffer[1] = $FF);
       teUTF8:
         begin
-        if ASize > 3 then
+        if ASize >= 3 then
           ABomExists := (ABuffer[0] = $EF) and (ABuffer[1] = $BB) and
             (ABuffer[2] = $BF)
         else
@@ -2983,7 +3164,12 @@ if ASize > 0 then
   else if AEncoding = teUTF8 then
     begin
     if ABomExists then
-      Result := Utf8Decode(@ABuffer[3], ASize - 3)
+      begin
+      if ASize > 3 then
+        Result := Utf8Decode(@ABuffer[3], ASize - 3)
+      else
+        SetLength(Result, 0);
+      end
     else
       Result := Utf8Decode(@ABuffer[0], ASize);
     end
@@ -3337,6 +3523,50 @@ while (p^ <> #0) and (c < ACount) do
 SetLength(Result, pd - pds);
 end;
 
+function StrCmpA(const s1, s2: PQCharA; AIgnoreCase: Boolean): Integer;
+var
+  p1, p2: PQCharA;
+  c1, c2: QCharA;
+begin
+p1 := s1;
+p2 := s2;
+if AIgnoreCase then
+  begin
+  while (p1^ <> 0) and (p2^ <> 0) do
+    begin
+    if p1^ <> p2^ then
+      begin
+      if (p1^ >= Ord('a')) and (p1^ <= Ord('z')) then
+        c1 := p1^ xor $20
+      else
+        c1 := p1^;
+      if (p2^ >= Ord('a')) and (p2^ <= Ord('z')) then
+        c2 := p2^ xor $20
+      else
+        c2 := p2^;
+      Result := Ord(c1) - Ord(c2);
+      if Result <> 0 then
+        Exit;
+      end;
+    Inc(p1);
+    Inc(p2);
+    end;
+  Result := Ord(p1^) - Ord(p2^);
+  end
+else
+  begin
+  while (p1^ <> 0) and (p2^ <> 0) do
+    begin
+    Result := p1^ - p2^;
+    if Result <> 0 then
+      Exit;
+    Inc(p1);
+    Inc(p2);
+    end;
+  Result := Ord(p1^) - Ord(p2^);
+  end;
+end;
+
 function StrCmpW(const s1, s2: PQCharW; AIgnoreCase: Boolean): Integer;
 var
   p1, p2: PQCharW;
@@ -3493,7 +3723,7 @@ if (l = 38) or (l = 36) then
   AGuid.D3 := l;
   Inc(p);
   // 0102-030405060708
-  // Ê£ÏÂµÄ16¸ö×Ö·û
+  // å‰©ä¸‹çš„16ä¸ªå­—ç¬¦
   l := 0;
   while IsHexChar(p[0]) do
     begin
@@ -3556,9 +3786,9 @@ LS := Length(S);
 if (LO > 0) and (LS >= LO) then
   begin
   AReplaceOnce := not(rfReplaceAll in AFlags);
-  // LO=LN£¬Ôò²»±äLR=LS£¬¼ÙÉèÈ«Ìæ»»£¬Ò²²»¹ıÊÇÔ­³¤¶È
-  // LO<LN£¬ÔòLR=LS+(LS*LN)/LO£¬¼ÙÉèÈ«Ìæ»»µÄ³¤¶È
-  // LO>LN£¬ÔòLR=LS£¬¼ÙÉèÒ»´Î¶¼²»Ìæ»»£¬Ò²²»¹ıÊÇÔ­³¤¶È
+  // LO=LNï¼Œåˆ™ä¸å˜LR=LSï¼Œå‡è®¾å…¨æ›¿æ¢ï¼Œä¹Ÿä¸è¿‡æ˜¯åŸé•¿åº¦
+  // LO<LNï¼Œåˆ™LR=LS+(LS*LN)/LOï¼Œå‡è®¾å…¨æ›¿æ¢çš„é•¿åº¦
+  // LO>LNï¼Œåˆ™LR=LSï¼Œå‡è®¾ä¸€æ¬¡éƒ½ä¸æ›¿æ¢ï¼Œä¹Ÿä¸è¿‡æ˜¯åŸé•¿åº¦
   if LO >= LN then
     LR := LS
   else if AReplaceOnce then
@@ -3588,11 +3818,90 @@ if (LO > 0) and (LS >= LO) then
       ps := pr;
       end;
   until (pr = nil) or AReplaceOnce;
-  // ½«Ê£Óà²¿·ÖºÏ²¢µ½Ä¿±ê
+  // å°†å‰©ä½™éƒ¨åˆ†åˆå¹¶åˆ°ç›®æ ‡
   l := IntPtr(pse) - IntPtr(ps);
   Move(ps^, pd^, l);
   Inc(pd, l shr 1);
   SetLength(Result, pd - pds);
+  end
+else
+  Result := S;
+end;
+
+function StringReplaceWithW(const S, AStartTag, AEndTag, AReplaced: QStringW;
+  AWithTag, AIgnoreCase: Boolean; AMaxTimes: Cardinal): QStringW;
+var
+  po, pe, pws, pwe, pd, pStart, pEnd, pReplaced: PQCharW;
+  l, DL, LS, LE, LR: Integer;
+  StrStrFunc: TStrStrFunction;
+begin
+l := Length(S);
+LS := Length(AStartTag);
+LE := Length(AEndTag);
+if (l >= LS + LE) and (AMaxTimes > 0) then
+  begin
+  LR := Length(AReplaced);
+  po := PQCharW(S);
+  pe := po + l;
+  pStart := PQCharW(AStartTag);
+  pEnd := PQCharW(AEndTag);
+  pReplaced := PQCharW(AReplaced);
+  SetLength(Result, l * LR); // æœ€ç³Ÿç³•çš„æƒ…å†µï¼Œæ¯ä¸ªéƒ½è¢«æ›¿æ¢ä¸ºç›®æ ‡,å½“ç„¶è¿™ä¸å¯èƒ½
+  pd := PQCharW(Result);
+  if AIgnoreCase then
+    StrStrFunc := StrIStrW
+  else
+    StrStrFunc := StrStrW;
+  repeat
+    pws := StrStrFunc(po, pStart);
+    if pws = nil then
+      begin
+      DL := (pe - po);
+      Move(po^, pd^, DL shl 1);
+      SetLength(Result, pd - PQCharW(Result) + DL);
+      Exit;
+      end
+    else
+      begin
+      pwe := StrStrFunc(pws + LS, pEnd);
+      if pwe = nil then // æ²¡æ‰¾åˆ°ç»“å°¾
+        begin
+        DL := pe - po;
+        Move(po^, pd^, DL shl 1);
+        SetLength(Result, pd - PQCharW(Result) + DL);
+        Exit;
+        end
+      else
+        begin
+        DL := pws - po;
+        if AWithTag then
+          begin
+          Move(po^, pd^, (LS + DL) shl 1);
+          Inc(pd, DL);
+          Move(pReplaced^, pd^, LR shl 1);
+          Inc(pd, LR);
+          Move(pwe^, pd^, LE shl 1);
+          Inc(pd, LE);
+          end
+        else
+          begin
+          Move(po^, pd^, DL shl 1);
+          Inc(pd, DL);
+          Move(pReplaced^, pd^, LR shl 1);
+          Inc(pd, LR);
+          end;
+        po := pwe + LE;
+        Dec(AMaxTimes);
+        end;
+      end;
+  until (AMaxTimes = 0) and (IntPtr(po) < IntPtr(pe));
+  if IntPtr(po) < IntPtr(pe) then
+    begin
+    DL := pe - po;
+    Move(po^, pd^, DL shl 1);
+    Inc(pd, DL);
+    SetLength(Result, pd - PQCharW(Result));
+    end;
   end
 else
   Result := S;
@@ -3782,7 +4091,7 @@ var
   ANeg: Boolean;
 begin
 ps := S;
-// Ìø¹ı16½øÖÆ¿ªÊ¼×Ö·û
+// è·³è¿‡16è¿›åˆ¶å¼€å§‹å­—ç¬¦
 if S[0] = '$' then
   begin
   Inc(S);
@@ -3843,7 +4152,7 @@ var
   begin
   ParseInt(S, iVal);
   ANum := iVal;
-  if S^ = '.' then // Ğ¡Êı²¿·Ö
+  if S^ = '.' then // å°æ•°éƒ¨åˆ†
     begin
     Inc(S);
     ACount := ParseInt(S, iVal);
@@ -3969,6 +4278,100 @@ else
   Result := ASource;
 end;
 
+function DeleteRightW(const S, ADelete: QStringW; AIgnoreCase: Boolean = False;
+  ACount: Integer = MaxInt): QStringW;
+var
+  ps, pd, pe: PQCharW;
+  LS, LD: Integer;
+begin
+LS := Length(S);
+LD := Length(ADelete);
+if LS < LD then
+  Result := S
+else
+  begin
+  pe := PQCharW(S) + Length(S);
+  pd := PQCharW(ADelete);
+  if AIgnoreCase then
+    begin
+    while LS >= LD do
+      begin
+      ps := pe - LD;
+      if StrIStrW(ps, pd) = ps then
+        begin
+        pe := ps;
+        Dec(LS, LD);
+        end
+      else
+        Break;
+      end;
+    end
+  else
+    begin
+    while LS >= LD do
+      begin
+      ps := pe - LD;
+      if CompareMem(ps, pd, LD shl 1) then
+        begin
+        pe := ps;
+        Dec(LS, LD);
+        end
+      else
+        Break;
+      end;
+    end;
+  SetLength(Result, LS);
+  if LS > 0 then
+    Move(PWideChar(S)^, PQCharW(Result)^, LS shl 1);
+  end;
+end;
+
+function DeleteLeftW(const S, ADelete: QStringW; AIgnoreCase: Boolean = False;
+  ACount: Integer = MaxInt): QStringW;
+var
+  ps, pd: PQCharW;
+  LS, LD: Integer;
+begin
+LS := Length(S);
+LD := Length(ADelete);
+if LS < LD then
+  Result := S
+else
+  begin
+  ps := PQCharW(S);
+  pd := PQCharW(ADelete);
+  if AIgnoreCase then
+    begin
+    while LS >= LD do
+      begin
+      if StartWithW(ps, pd, True) then
+        begin
+        Inc(ps, LD);
+        Dec(LS, LD);
+        end
+      else
+        Break;
+      end;
+    end
+  else
+    begin
+    while LS >= LD do
+      begin
+      if CompareMem(ps, pd, LD shl 1) then
+        begin
+        Inc(ps, LD);
+        Dec(LS, LD);
+        end
+      else
+        Break;
+      end;
+    end;
+  SetLength(Result, LS);
+  if LS > 0 then
+    Move(ps^, PQCharW(Result)^, LS shl 1);
+  end;
+end;
+
 function ContainsCharW(const S, ACharList: QStringW): Boolean;
 var
   ps: PQCharW;
@@ -4013,7 +4416,7 @@ var
 begin
 if Length(S) > 0 then
   begin
-  System.SetLength(Result, Length(S) shl 3); // ×ªÒå´®×î³¤²»³¬¹ı8¸ö×Ö·û£¬³¤¶È*8¿Ï¶¨¹»ÁË
+  System.SetLength(Result, Length(S) shl 3); // è½¬ä¹‰ä¸²æœ€é•¿ä¸è¶…è¿‡8ä¸ªå­—ç¬¦ï¼Œé•¿åº¦*8è‚¯å®šå¤Ÿäº†
   p := PWideChar(S);
   pd := PWideChar(Result);
   while p^ <> #0 do
@@ -4136,7 +4539,7 @@ else
   Result := '';
 end;
 
-// ÏÂÃæÊÇÒ»Ğ©¸¨Öúº¯Êı
+// ä¸‹é¢æ˜¯ä¸€äº›è¾…åŠ©å‡½æ•°
 function ParseDateTime(S: PWideChar; var AResult: TDateTime): Boolean;
 var
   Y, M, d, H, N, Sec, MS: Word;
@@ -4200,7 +4603,7 @@ if S^ = '-' then
   SkipSpaceW(S);
   if S^ <> #0 then
     begin
-    if not ParseNum(H) then // Ã»¸úÊ±¼äÖµ
+    if not ParseNum(H) then // æ²¡è·Ÿæ—¶é—´å€¼
       begin
       AResult := ADate;
       Exit;
@@ -4294,7 +4697,7 @@ if S^ = ':' then
         AResult := ADate + EncodeTime(H, N, Sec, 0);
       Exit;
       end
-    else if MS >= 1000 then // ³¬¹ı1000ÊÇÒÔÎ¢ÃëÎªµ¥Î»¼ÆÊ±µÄ£¬×ª»»ÎªºÁÃë
+    else if MS >= 1000 then // è¶…è¿‡1000æ˜¯ä»¥å¾®ç§’ä¸ºå•ä½è®¡æ—¶çš„ï¼Œè½¬æ¢ä¸ºæ¯«ç§’
       begin
       while MS >= 1000 do
         MS := MS div 10;
@@ -4344,10 +4747,10 @@ var
 const
   MonthNames: array [0 .. 11] of QStringW = ('Jan', 'Feb', 'Mar', 'Apr', 'May',
     'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec');
-  Comma: PWideChar = ',';
+  Comma: PWideChar  = ',';
   Digits: PWideChar = '0123456789';
 begin
-// Ìø¹ıĞÇÆÚ£¬Õâ¸ö¿ÉÒÔÖ±½ÓÍ¨¹ıÈÕÆÚ¼ÆËã³öÀ´£¬²»ĞèÒª
+// è·³è¿‡æ˜ŸæœŸï¼Œè¿™ä¸ªå¯ä»¥ç›´æ¥é€šè¿‡æ—¥æœŸè®¡ç®—å‡ºæ¥ï¼Œä¸éœ€è¦
 SkipUntilW(p, Comma, WideChar(0));
 if p^ = #0 then
   begin
@@ -4358,7 +4761,7 @@ else
   Inc(p);
 SkipUntilW(p, Digits, WideChar(0));
 d := 0;
-// ÈÕÆÚ
+// æ—¥æœŸ
 while (p^ >= '0') and (p^ <= '9') do
   begin
   d := d * 10 + Ord(p^) - Ord('0');
@@ -4483,11 +4886,17 @@ if ASeconds > 0 then
 end;
 { QStringA }
 
-procedure QStringA.From(p: PQCharA; AOffset, ALen: Integer);
+function QStringA.From(p: PQCharA; AOffset, ALen: Integer): PQStringA;
 begin
 SetLength(ALen);
 Inc(p, AOffset);
 Move(p^, PQCharA(@FValue[1])^, ALen);
+Result := @Self;
+end;
+
+function QStringA.From(const S: QStringA; AOffset: Integer): PQStringA;
+begin
+Result := From(PQCharA(S), AOffset, S.Length);
 end;
 
 function QStringA.GetChars(AIndex: Integer): QCharA;
@@ -4517,7 +4926,7 @@ end;
 
 function QStringA.GetLength: Integer;
 begin
-// QStringA.FValue[0]´æÖü±àÂëÀàĞÍ£¬0-ANSI,1-UTF8£¬Ä©Î²´æÖü×Ö·û´®µÄ\0½áÊø·û
+// QStringA.FValue[0]å­˜è´®ç¼–ç ç±»å‹ï¼Œ0-ANSI,1-UTF8ï¼Œæœ«å°¾å­˜è´®å­—ç¬¦ä¸²çš„\0ç»“æŸç¬¦
 Result := System.Length(FValue);
 if Result >= 2 then
   Dec(Result, 2)
@@ -4670,8 +5079,8 @@ Result := 0;
 if l > 0 then
   begin
   ps := p;
-  LR := (l and $03); // ¼ì²é³¤¶ÈÊÇ·ñÎª4µÄÕûÊı±¶
-  l := (l and $FFFFFFFC); // ÕûÊı³¤¶È
+  LR := (l and $03); // æ£€æŸ¥é•¿åº¦æ˜¯å¦ä¸º4çš„æ•´æ•°å€
+  l := (l and $FFFFFFFC); // æ•´æ•°é•¿åº¦
   while l > 0 do
     begin
     Result := ((Result shl 5) or (Result shr 27)) xor ps^;
@@ -4680,7 +5089,7 @@ if l > 0 then
     end;
   if LR <> 0 then
     begin
-    // lr¿Ï¶¨ÊÇ1,2,3
+    // lrè‚¯å®šæ˜¯1,2,3
     case LR of
       1:
         l := PByte(ps)^;
@@ -4708,6 +5117,35 @@ if S <> nil then
   end
 else
   Result.Length := 0;
+end;
+{$IFNDEF NEXTGEN}
+
+class operator QStringA.Implicit(const S: AnsiString): QStringA;
+begin
+Result.From(PQCharA(S), 0, System.Length(S));
+end;
+
+class operator QStringA.Implicit(const S: QStringA): AnsiString;
+begin
+System.SetLength(Result, S.Length);
+if S.Length > 0 then
+  Move(PQCharA(S)^, PAnsiChar(Result)^, S.Length);
+end;
+{$ENDIF}
+
+function QStringA.Cat(p: PQCharA; ALen: Integer): PQStringA;
+var
+  l: Integer;
+begin
+l := Length;
+SetLength(l + ALen);
+Move(p^, FValue[1 + l], ALen);
+Result := @Self;
+end;
+
+function QStringA.Cat(const S: QStringA): PQStringA;
+begin
+Result := Cat(PQCharA(S), S.Length);
 end;
 
 { TQStringCatHelperW }
@@ -4845,6 +5283,9 @@ if ASize < 0 then
   ASize := offset - ASize;
 if ASize > FSize then
   begin
+  {$IFDEF DEBUG}
+  Inc(FAllocTimes);
+  {$ENDIF}
   FSize := ((ASize + FBlockSize) div FBlockSize) * FBlockSize;
   SetLength(FValue, FSize);
   FStart := PQCharW(@FValue[0]);
@@ -4918,13 +5359,20 @@ begin
 Result := FObject;
 end;
 
-// ¼æÈİ2007°æµÄÔ­×Ó²Ù×÷½Ó¿Ú
+// å…¼å®¹2007ç‰ˆçš„åŸå­æ“ä½œæ¥å£
 {$IF RTLVersion<26}
 
 function AtomicCmpExchange(var Target: Integer; Value: Integer;
   Comparand: Integer): Integer; inline;
 begin
 Result := InterlockedCompareExchange(Target, Value, Comparand);
+end;
+
+function AtomicCmpExchange(var Target: Pointer; Value: Pointer;
+  Comparand: Pointer): Pointer; inline;
+begin
+Result := Pointer(InterlockedCompareExchange(PInteger(Target)^, Integer(Value),
+  Integer(Comparand)));
 end;
 
 function AtomicIncrement(var Target: Integer): Integer; inline;
@@ -4943,7 +5391,7 @@ Result := InterlockedExchange(Target, Value);
 end;
 {$IFEND <XE5}
 
-// Î»Óë£¬·µ»ØÔ­Öµ
+// ä½ä¸ï¼Œè¿”å›åŸå€¼
 function AtomicAnd(var Dest: Integer; const AMask: Integer): Integer; inline;
 var
   I: Integer;
@@ -4954,7 +5402,7 @@ repeat
 until AtomicCmpExchange(Dest, I, Result) = Result;
 end;
 
-// Î»»ò£¬·µ»ØÔ­Öµ
+// ä½æˆ–ï¼Œè¿”å›åŸå€¼
 function AtomicOr(var Dest: Integer; const AMask: Integer): Integer; inline;
 var
   I: Integer;
