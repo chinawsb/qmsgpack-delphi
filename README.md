@@ -1,4 +1,3 @@
-# Msgpack for Delphi
     Topic in Offical Website (http://www.qdac.cc) is in chinese language only,The QMsgPack topic is http://www.qdac.cc/?cat=44.
     QMsgPack is a simple and powerful Delphi & C++ Builder implementation,It can pack and unpack 
 messagepack data in Pascal or C++ code quickly.
