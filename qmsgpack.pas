@@ -1,4 +1,4 @@
-﻿unit qmsgpack;
+unit qmsgpack;
 {$i 'qdac.inc'}
 
 interface
@@ -24,8 +24,26 @@ interface
 }
 
 { 修订日志
+  2014.11.9
+  ==========
+  + 新增IntByPath,IntByName，BoolByPath,BoolByName,FloatByPath,FloatByName,DateTimeByPath,
+    DateTimeByName函数，以简化判断编程(参考QJson)
+  2014.10.30
+  ==========
+  + 新增Detach、AttachTo、MoveTo、Remove函数
+  * 允许MsgPack结点名称重命名以避免调用MoveTo、AttachTo时元素未命名
+
+  2014.10.21
+  ==========
+  * 修正了解析数组元素数量介于16-31之间时出错的问题（追梦报告）
+  2014.8.25
+  ==========
+  * 修正了打开IO越界检查时，如果字符串长度为0,GetAsString出错的问题(天地弦报告)
+
   2014.8.15
   ==========
+  * 修正了加载长二进制数据时，错误的跳过内容的前4个字节的问题(天地弦报告)
+  * 优化了AsVariant读写时，对字节数组时的转换效率
   * 修正了CopyValue时，对于非字符串类型拷贝长度设置错误的问题
   * 网络字节顺序和主机字节顺序转换统一改为使用ExchangeByteOrder函数完成
 
@@ -201,8 +219,10 @@ type
     procedure SetAsBytes(const Value: TBytes);
     function GetAsSingle: Single;
     procedure SetAsSingle(const Value: Single);
+    procedure SetName(const Value: QStringW);
   protected
     procedure Replace(AIndex: Integer; ANewItem: TQMsgPack); virtual;
+    procedure DoNodeNameChanged(ANode: TQMsgPack); virtual;
   public
     /// <summary>构造函数</summary>
     constructor Create; overload;
@@ -346,10 +366,54 @@ type
     /// <param name="AName">结点名称</param>
     /// <returns>返回应结点的值</returns>
     function ValueByName(AName, ADefVal: QStringW): QStringW;
+    /// <summary>获取指定名称获取结点的值的布尔值表示</summary>
+    /// <param name="AName">结点名称</param>
+    /// <param name="ADefVal">默认值</param>
+    /// <returns>返回应结点的值</returns>
+    function BoolByName(AName: QStringW; ADefVal: Boolean): Boolean;
+    /// <summary>获取指定名称获取结点的值的整数值表示</summary>
+    /// <param name="AName">结点名称</param>
+    /// <param name="ADefVal">默认值</param>
+    /// <returns>返回应结点的值</returns>
+    function IntByName(AName: QStringW; ADefVal: Int64): Int64;
+    /// <summary>获取指定名称获取结点的值的浮点值表示</summary>
+    /// <param name="AName">结点名称</param>
+    /// <param name="ADefVal">默认值</param>
+    /// <returns>返回应结点的值</returns>
+    function FloatByName(AName: QStringW; ADefVal: Extended): Extended;
+    /// <summary>获取指定名称获取结点的值的日期时间值表示</summary>
+    /// <param name="AName">结点名称</param>
+    /// <param name="ADefVal">默认值</param>
+    /// <returns>返回应结点的值</returns>
+    function DateTimeByName(AName: QStringW; ADefVal: TDateTime): TDateTime;
     /// <summary>获取指定路径结点的值的字符串表示</summary>
     /// <param name="AName">结点名称</param>
     /// <returns>如果结果不存在，返回默认值，否则，返回原始值</returns>
     function ValueByPath(APath, ADefVal: QStringW): QStringW;
+    /// <summary>获取指定路径结点的值的布尔值表示</summary>
+    /// <param name="AName">结点名称</param>
+    /// <param name="ADefVal">默认值</param>
+    /// <returns>如果结果不存在，返回默认值，否则，返回原始值</returns>
+    function BoolByPath(APath: QStringW; ADefVal: Boolean): Boolean;
+    /// <summary>获取指定路径结点的值的整数表示</summary>
+    /// <param name="AName">结点名称</param>
+    /// <param name="ADefVal">默认值</param>
+    /// <returns>如果结果不存在，返回默认值，否则，返回原始值</returns>
+    function IntByPath(APath: QStringW; ADefVal: Int64): Int64;
+    /// <summary>获取指定路径结点的值的浮点数表示</summary>
+    /// <param name="AName">结点名称</param>
+    /// <param name="ADefVal">默认值</param>
+    /// <returns>如果结果不存在，返回默认值，否则，返回原始值</returns>
+    function FloatByPath(APath: QStringW; ADefVal: Extended): Extended;
+    /// <summary>获取指定路径结点的值的日期时间表示</summary>
+    /// <param name="AName">结点名称</param>
+    /// <param name="ADefVal">默认值</param>
+    /// <returns>如果结果不存在，返回默认值，否则，返回原始值</returns>
+    function DateTimeByPath(APath: QStringW; ADefVal: TDateTime): TDateTime;
+    /// <summary>获取指定名称的第一个结点</summary>
+    /// <param name="AName">结点名称</param>
+    /// <returns>返回找到的结点，如果未找到，返回空(NULL/nil)</returns>
+    /// <remarks>注意QJson并不检查重名，因此，如果存在重名的结点，只会返回第一个结点</remarks>
     /// <summary>获取指定名称的第一个结点</summary>
     /// <param name="AName">结点名称</param>
     /// <returns>返回找到的结点，如果未找到，返回空(NULL/nil)</returns>
@@ -510,13 +574,35 @@ type
     /// <summary>将当前数据保存到文件中</summary>
     /// <param name="AFileName">目标文件名</param>
     procedure BytesToFile(AFileName: QStringW);
+    /// <summary>将指定索引的子结点移除</summary>
+    /// <param name="AItemIndex">要移除的子结点索引</param>
+    /// <returns>返回被移除的子结点，如果指定的索引不存在，返回nil</returns>
+    /// <remarks>被移除的子结点需要用户自己手工释放</remarks>
+    function Remove(AItemIndex: Integer): TQMsgPack; overload; virtual;
+    /// <summary>将指定的子结点移除</summary>
+    /// <param name="ANode">要移除的子结点</param>
+    /// <remarks>被移除的子结点需要用户自己手工释放</remarks>
+    procedure Remove(ANode: TQMsgPack); overload;
+    /// <summary>从当前XML父结点中分离当前结点</summary>
+    /// <remarks>分离后的结点需要单独释放</remarks>
+    procedure Detach;
+    /// <summary>将当前结点附加到新的父结点上</summary>
+    /// <param name="AParent">要附加的目标结点</param>
+    /// <remarks>附加后的结点由父结点负责释放</remarks>
+    procedure AttachTo(ANewParent: TQMsgPack);
+    /// <summary>将当前结点移动的新的父结点的指定位置</summary>
+    /// <param name="ANewParent">新的父结点</param>
+    /// <param name="AIndex">新位置索引</param>
+    /// <remarks>如果新位置索引小于等于0，则插入到起始位置，如果大于父的已有结点数量，则插入到
+    /// 父结点末尾，否则添加到指定位置</remarks>
+    procedure MoveTo(ANewParent: TQMsgPack; AIndex: Integer);
     /// <summary>父结点</summary>
     property Parent: TQMsgPack read FParent;
     /// <summary>结点类型</summary>
     /// <seealso>TQMsgPackType</seealso>
     property DataType: TQMsgPackType read FDataType write SetDataType;
     /// <summary>结点名称</summary>
-    property Name: QStringW read FName;
+    property Name: QStringW read FName write SetName;
     /// <summary>子结点数量</<summary>summary>
     property Count: Integer read GetCount;
     /// <summary>子结点数组</summary>
@@ -574,13 +660,14 @@ type
     FHashTable: TQHashTable;
     function CreateItem: TQMsgPack; override;
     procedure Replace(AIndex: Integer; ANewItem: TQMsgPack); override;
+    procedure DoNodeNameChanged(ANode: TQMsgPack); override;
   public
     constructor Create; overload;
     destructor Destroy; override;
     procedure Assign(ANode: TQMsgPack); override;
     function Add(AName: QStringW): TQMsgPack; override;
     function IndexOf(const AName: QStringW): Integer; override;
-    procedure Delete(AIndex: Integer); override;
+    function Remove(AIndex: Integer): TQMsgPack; override;
     procedure Clear; override;
   end;
 
@@ -629,7 +716,11 @@ resourcestring
   SUnsupportValueType = 'TValue不支持二进制或扩展类型.';
   SArrayTypeMissed = '未知的数组元素类型。';
   SMapNameMissed = '映射名称未找到，无效和MessagePack格式？';
-
+  SCantAttachToSelf = '不允许自己附加为自己的子结点。';
+  SCanAttachToNoneContainer = '不能将结点附加到非数组和映射类型的结点下。';
+  SCantAttachNoNameNodeToObject = '不能将未命名的结点做为映射类型的子结点。';
+  SNodeNameExists = '指定的父结点下已经存在名为 %s 的子结点。';
+  SCantMoveToChild = '不能将自己移动到自己的子结点下面';
 type
 
   TQMsgPackValue = packed record
@@ -682,6 +773,42 @@ if Assigned(OnQMsgPackCreate) then
   Result := OnQMsgPackCreate
 else
   Result := TQMsgPack.Create;
+end;
+
+function TQMsgPack.DateTimeByName(AName: QStringW;
+  ADefVal: TDateTime): TDateTime;
+var
+  AChild: TQMsgPack;
+begin
+AChild := ItemByName(AName);
+if Assigned(AChild) then
+  begin
+  try
+    Result := AChild.AsDateTime;
+  except
+    Result:=ADefVal;
+  end;
+  end
+else
+  Result := ADefVal;
+end;
+
+function TQMsgPack.DateTimeByPath(APath: QStringW;
+  ADefVal: TDateTime): TDateTime;
+var
+  AItem: TQMsgPack;
+begin
+AItem := ItemByPath(APath);
+if Assigned(AItem) then
+  begin
+  try
+    Result := AItem.AsDateTime;
+  except
+    Result := ADefVal;
+  end;
+  end
+else
+  Result := ADefVal;
 end;
 
 procedure TQMsgPack.Delete(AName: QStringW);
@@ -776,6 +903,17 @@ if DataType in [mptArray, mptMap] then
 inherited;
 end;
 
+procedure TQMsgPack.Detach;
+begin
+if Assigned(FParent) then
+  FParent.Remove(Self);
+end;
+
+procedure TQMsgPack.DoNodeNameChanged(ANode: TQMsgPack);
+begin
+
+end;
+
 function TQMsgPack.Add(const AName: QStringW; AItems: array of const)
   : TQMsgPack;
 var
@@ -864,6 +1002,7 @@ function TQMsgPack.Add(AName: QStringW): TQMsgPack;
 begin
 Result := Add;
 Result.FName := AName;
+DoNodeNameChanged(Result);
 end;
 
 function TQMsgPack.Add(AName: QStringW; const AValue: TBytes): TQMsgPack;
@@ -917,7 +1056,7 @@ begin
 if ANode.FDataType in [mptArray, mptMap] then
   begin
   DataType := ANode.FDataType;
-  if Count>0 then
+  if Count > 0 then
     Clear;
   for I := 0 to ANode.Count - 1 do
     begin
@@ -934,6 +1073,11 @@ if ANode.FDataType in [mptArray, mptMap] then
   end
 else
   CopyValue(ANode);
+end;
+
+procedure TQMsgPack.AttachTo(ANewParent: TQMsgPack);
+begin
+MoveTo(ANewParent, MaxInt);
 end;
 
 procedure TQMsgPack.Clear;
@@ -1049,16 +1193,16 @@ end;
 
 procedure TQMsgPack.CopyValue(ASource: TQMsgPack);
 var
-  L: Integer;
+  l: Integer;
 begin
-L := Length(ASource.FValue);
+l := Length(ASource.FValue);
 DataType := ASource.DataType;
 if DataType in [mptString, mptBinary, mptExtended] then
-  SetLength(FValue, L);
-if L>0 then
+  SetLength(FValue, l);
+if l > 0 then
   begin
-  if not (DataType in [mptUnknown,mptNull,mptArray,mptMap]) then
-    Move(ASource.FValue[0], FValue[0], L);
+  if not(DataType in [mptUnknown, mptNull, mptArray, mptMap]) then
+    Move(ASource.FValue[0], FValue[0], l);
   end;
 end;
 
@@ -1458,6 +1602,40 @@ if Assigned(AFilter) then
 else
   Result := nil;
 end;
+function TQMsgPack.FloatByName(AName: QStringW; ADefVal: Extended): Extended;
+var
+  AChild: TQMsgPack;
+begin
+AChild := ItemByName(AName);
+if Assigned(AChild) then
+  begin
+  try
+    Result := AChild.AsFloat;
+  except
+    Result:=ADefVal;
+  end;
+  end
+else
+  Result := ADefVal;
+end;
+
+function TQMsgPack.FloatByPath(APath: QStringW; ADefVal: Extended): Extended;
+var
+  AItem: TQMsgPack;
+begin
+AItem := ItemByPath(APath);
+if Assigned(AItem) then
+  begin
+  try
+    Result := AItem.AsFloat;
+  except
+    Result := ADefVal;
+  end;
+  end
+else
+  Result := ADefVal;
+end;
+
 {$IFDEF UNICODE}
 
 function TQMsgPack.FindIf(const ATag: Pointer; ANest: Boolean;
@@ -1597,8 +1775,8 @@ var
       Result := PInteger(@ATemp)^;
     otULong:
       Result := PCardinal(@ATemp)^
-    else
-      Result:=0;
+  else
+    Result := 0;
   end;
   end;
   procedure AddRecord;
@@ -1840,6 +2018,40 @@ end;
 end;
 {$ENDIF UNICODE}
 
+function TQMsgPack.BoolByName(AName: QStringW; ADefVal: Boolean): Boolean;
+var
+  AChild: TQMsgPack;
+begin
+AChild := ItemByName(AName);
+if Assigned(AChild) then
+  begin
+  try
+    Result := AChild.AsBoolean;
+  except
+    Result:=ADefVal;
+  end;
+  end
+else
+  Result := ADefVal;
+end;
+
+function TQMsgPack.BoolByPath(APath: QStringW; ADefVal: Boolean): Boolean;
+var
+  AItem: TQMsgPack;
+begin
+AItem := ItemByPath(APath);
+if Assigned(AItem) then
+  begin
+  try
+    Result := AItem.AsBoolean
+  except
+    Result := ADefVal;
+  end;
+  end
+else
+  Result := ADefVal;
+end;
+
 procedure TQMsgPack.BytesFromFile(AFileName: QStringW);
 var
   AStream: TMemoryStream;
@@ -2034,7 +2246,7 @@ function TQMsgPack.GetAsString: QStringW;
   function EncodeArray: QStringW;
   const
     ArrayStart: PWideChar = '[';
-    ArrayEnd: PWideChar = ']';
+    ArrayEnd: PWideChar   = ']';
     ArrayDelim: PWideChar = ',';
   var
     I: Integer;
@@ -2057,12 +2269,12 @@ function TQMsgPack.GetAsString: QStringW;
   end;
   function EncodeMap: QStringW;
   const
-    MapStart: PWideChar = '{';
-    MapEnd: PWideChar = '}';
-    MapDelim: PWideChar = ',';
+    MapStart: PWideChar      = '{';
+    MapEnd: PWideChar        = '}';
+    MapDelim: PWideChar      = ',';
     MapValueDelim: PWideChar = ':';
-    MapEmptyName: PWideChar = '""';
-    MapStrStart: PWideChar = '"';
+    MapEmptyName: PWideChar  = '""';
+    MapStrStart: PWideChar   = '"';
   var
     I: Integer;
     ABuilder: TQStringCatHelperW;
@@ -2104,7 +2316,12 @@ function TQMsgPack.GetAsString: QStringW;
 
 begin
 if DataType = mptString then
-  Result := StrDupX(@FValue[0], Length(FValue) shr 1)
+  begin
+  if Length(FValue) = 0 then
+    SetLength(Result, 0)
+  else
+    Result := StrDupX(@FValue[0], Length(FValue) shr 1);
+  end
 else
   begin
   case DataType of
@@ -2137,13 +2354,13 @@ var
   I: Integer;
   procedure BytesAsVariant;
   var
-    L: Integer;
-    p:PByte;
+    l: Integer;
+    p: PByte;
   begin
-  L := Length(FValue);
-  Result := VarArrayCreate([0, L - 1], varByte);
-  p:=VarArrayLock(Result);
-  Move(FValue[0],p^,L);
+  l := Length(FValue);
+  Result := VarArrayCreate([0, l - 1], varByte);
+  p := VarArrayLock(Result);
+  Move(FValue[0], p^, l);
   VarArrayUnlock(Result);
   end;
 
@@ -2329,6 +2546,40 @@ for I := 0 to Count - 1 do
   end;
 end;
 
+function TQMsgPack.IntByName(AName: QStringW; ADefVal: Int64): Int64;
+var
+  AChild: TQMsgPack;
+begin
+AChild := ItemByName(AName);
+if Assigned(AChild) then
+  begin
+  try
+    Result := AChild.AsInt64;
+  except
+    Result:=ADefVal;
+  end;
+  end
+else
+  Result := ADefVal;
+end;
+
+function TQMsgPack.IntByPath(APath: QStringW; ADefVal: Int64): Int64;
+var
+  AItem: TQMsgPack;
+begin
+AItem := ItemByPath(APath);
+if Assigned(AItem) then
+  begin
+  try
+    Result := AItem.AsInt64;
+  except
+    Result := ADefVal;
+  end;
+  end
+else
+  Result := ADefVal;
+end;
+
 procedure TQMsgPack.InternalParse(var p: PByte; l: Integer);
 var
   ps: PByte;
@@ -2363,7 +2614,7 @@ var
     begin
     Inc(p);
     C := ExchangeByteOrder(PWord(p)^);
-    Inc(p,2);
+    Inc(p, 2);
     Result := Utf8Decode(PQCharA(p), C);
     Inc(p, C);
     end
@@ -2371,7 +2622,7 @@ var
     begin
     Inc(p);
     C := ExchangeByteOrder(PCardinal(p)^);
-    Inc(p,4);
+    Inc(p, 4);
     Result := Utf8Decode(PQCharA(p), C);
     Inc(p, C);
     end
@@ -2468,7 +2719,7 @@ while IntPtr(p) - IntPtr(ps) < l do
         Inc(p);
         DataType := mptBinary;
         ACount := ExchangeByteOrder(PWord(p)^);
-        Inc(p,2);
+        Inc(p, 2);
         SetLength(FValue, ACount);
         Move(p^, FValue[0], ACount);
         Inc(p, ACount);
@@ -2478,7 +2729,7 @@ while IntPtr(p) - IntPtr(ps) < l do
         Inc(p);
         DataType := mptBinary;
         ACount := ExchangeByteOrder(PCardinal(p)^);
-        Inc(p,4);
+        Inc(p, 4);
         SetLength(FValue, ACount);
         Move(p^, FValue[0], ACount);
         Inc(p, ACount);
@@ -2500,7 +2751,7 @@ while IntPtr(p) - IntPtr(ps) < l do
         Inc(p);
         DataType := mptExtended;
         ACount := ExchangeByteOrder(PWord(p)^);
-        Inc(p,2);
+        Inc(p, 2);
         SetLength(FValue, ACount);
         FExtType := p^;
         Inc(p);
@@ -2512,7 +2763,7 @@ while IntPtr(p) - IntPtr(ps) < l do
         Inc(p);
         DataType := mptExtended;
         ACount := ExchangeByteOrder(PCardinal(p)^);
-        Inc(p,4);
+        Inc(p, 4);
         SetLength(FValue, ACount);
         FExtType := p^;
         Inc(p);
@@ -2523,13 +2774,13 @@ while IntPtr(p) - IntPtr(ps) < l do
         begin
         Inc(p);
         AsSingle := ExchangeByteOrder(PSingle(p)^);
-        Inc(p,4);
+        Inc(p, 4);
         end;
       $CB: // Float 64
         begin
         Inc(p);
         AsFloat := ExchangeByteOrder(PDouble(p)^);
-        Inc(p,8);
+        Inc(p, 8);
         end;
       $CC: // UInt8
         begin
@@ -2541,19 +2792,19 @@ while IntPtr(p) - IntPtr(ps) < l do
         begin
         Inc(p);
         AsInt64 := ExchangeByteOrder(PWord(p)^);
-        Inc(p,2);
+        Inc(p, 2);
         end;
-      $CE://UInt32
+      $CE: // UInt32
         begin
         Inc(p);
         AsInt64 := ExchangeByteOrder(PCardinal(p)^);
-        Inc(p,4);
+        Inc(p, 4);
         end;
-      $CF://UInt64
+      $CF: // UInt64
         begin
         Inc(p);
         AsInt64 := ExchangeByteOrder(PInt64(p)^);
-        Inc(p,8);
+        Inc(p, 8);
         end;
       $D0: // Int8
         begin
@@ -2565,19 +2816,19 @@ while IntPtr(p) - IntPtr(ps) < l do
         begin
         Inc(p);
         AsInt64 := ExchangeByteOrder(PSmallint(p)^);
-        Inc(p,2);
+        Inc(p, 2);
         end;
       $D2: // Int32
         begin
         Inc(p);
         AsInt64 := ExchangeByteOrder(PInteger(p)^);
-        Inc(p,4);
+        Inc(p, 4);
         end;
       $D3: // Int64
         begin
         Inc(p);
         AsInt64 := ExchangeByteOrder(PInt64(p)^);
-        Inc(p,8);
+        Inc(p, 8);
         end;
       $D4: // Fixed ext8,1B
         begin
@@ -2642,16 +2893,16 @@ while IntPtr(p) - IntPtr(ps) < l do
       $DA: // Str 16
         begin
         Inc(p);
-        ACount :=ExchangeByteOrder(PWord(p)^);
-        Inc(p,2);
+        ACount := ExchangeByteOrder(PWord(p)^);
+        Inc(p, 2);
         AsString := Utf8Decode(PQCharA(p), ACount);
         Inc(p, ACount);
         end;
       $DB: // Str 32
         begin
         Inc(p);
-        ACount :=ExchangeByteOrder(PCardinal(p)^);
-        Inc(p,4);
+        ACount := ExchangeByteOrder(PCardinal(p)^);
+        Inc(p, 4);
         AsString := Utf8Decode(PQCharA(p), ACount);
         Inc(p, ACount);
         end;
@@ -2660,6 +2911,7 @@ while IntPtr(p) - IntPtr(ps) < l do
         Inc(p);
         DataType := mptArray;
         ACount := ExchangeByteOrder(PWord(p)^);
+        Inc(p, 2);
         FItems.Capacity := ACount;
         for I := 0 to ACount - 1 do
           Add.InternalParse(p, l - (Integer(p) - Integer(ps)));
@@ -2669,7 +2921,7 @@ while IntPtr(p) - IntPtr(ps) < l do
         Inc(p);
         DataType := mptArray;
         ACount := ExchangeByteOrder(PCardinal(p)^);
-        Inc(p,4);
+        Inc(p, 4);
         FItems.Capacity := ACount;
         for I := 0 to ACount - 1 do
           Add.InternalParse(p, l - (Integer(p) - Integer(ps)));
@@ -2679,7 +2931,7 @@ while IntPtr(p) - IntPtr(ps) < l do
         Inc(p);
         DataType := mptMap;
         ACount := ExchangeByteOrder(PWord(p)^);
-        Inc(p,2);
+        Inc(p, 2);
         FItems.Capacity := ACount;
         for I := 0 to ACount - 1 do
           begin
@@ -2689,12 +2941,12 @@ while IntPtr(p) - IntPtr(ps) < l do
           AChild.InternalParse(p, l - (Integer(p) - Integer(ps)));
           end;
         end;
-      $DF: //Object map 32
+      $DF: // Object map 32
         begin
         Inc(p);
         DataType := mptMap;
         ACount := ExchangeByteOrder(PCardinal(p)^);
-        Inc(p,4);
+        Inc(p, 4);
         FItems.Capacity := ACount;
         for I := 0 to ACount - 1 do
           begin
@@ -2979,6 +3231,41 @@ AStream.ReadBuffer(ABytes[0], Length(ABytes));
 Parse(ABytes);
 end;
 
+procedure TQMsgPack.MoveTo(ANewParent: TQMsgPack; AIndex: Integer);
+begin
+if ANewParent = Self then
+  raise Exception.Create(SCantAttachToSelf)
+else
+  begin
+  if Parent = ANewParent then
+    Exit;
+  if IsParentOf(ANewParent) then
+    raise Exception.Create(SCantMoveToChild);
+  if ANewParent.DataType in [mptArray, mptMap] then
+    begin
+    if ANewParent.DataType = mptMap then
+      begin
+      if Length(Name) = 0 then
+        raise Exception.Create(SCantAttachNoNameNodeToObject)
+      else if ANewParent.IndexOf(Name) <> -1 then
+        raise Exception.CreateFmt(SNodeNameExists, [Name]);;
+      end;
+    if Assigned(FParent) then
+      FParent.Remove(Self);
+    FParent := ANewParent;
+    if AIndex >= ANewParent.Count then
+      ANewParent.FItems.Add(Self)
+    else if AIndex <= 0 then
+      ANewParent.FItems.Insert(0, Self)
+    else
+      ANewParent.FItems.Insert(AIndex, Self);
+    DoNodeNameChanged(Self);
+    end
+  else
+    raise Exception.Create(SCanAttachToNoneContainer);
+  end;
+end;
+
 procedure TQMsgPack.Parse(const s: TBytes);
 begin
 Parse(@s[0], Length(s));
@@ -2988,6 +3275,28 @@ procedure TQMsgPack.Parse(p: PByte; l: Integer);
 begin
 Clear;
 InternalParse(p, l);
+end;
+
+function TQMsgPack.Remove(AItemIndex: Integer): TQMsgPack;
+begin
+if FDataType in [mptArray, mptMap] then
+  begin
+  if (AItemIndex >= 0) and (AItemIndex < Count) then
+    begin
+    Result := Items[AItemIndex];
+    FItems.Delete(AItemIndex);
+    Result.FParent := nil;
+    end
+  else
+    Result := nil;
+  end
+else
+  Result := nil;
+end;
+
+procedure TQMsgPack.Remove(ANode: TQMsgPack);
+begin
+Remove(ANode.ItemIndex);
 end;
 
 procedure TQMsgPack.Replace(AIndex: Integer; ANewItem: TQMsgPack);
@@ -3085,14 +3394,14 @@ var
   AType: TVarType;
   procedure VarAsBytes;
   var
-    L: Integer;
+    l: Integer;
     p: PByte;
   begin
   DataType := mptBinary;
-  L := VarArrayHighBound(Value, 1) + 1;
-  SetLength(FValue, L);
+  l := VarArrayHighBound(Value, 1) + 1;
+  SetLength(FValue, l);
   p := VarArrayLock(Value);
-  Move(p^, FValue[0], L);
+  Move(p^, FValue[0], l);
   VarArrayUnlock(Value);
   end;
 
@@ -3143,7 +3452,7 @@ if FDataType <> Value then
     begin
     if not Assigned(FItems) then
       FItems := TQMsgPackList.Create
-    else if FDataType in [mptArray,mptMap] then
+    else if FDataType in [mptArray, mptMap] then
       Clear;
     end
   else
@@ -3182,6 +3491,21 @@ if FExtType <> Value then
   FExtType := Value;
   end;
 end;
+
+procedure TQMsgPack.SetName(const Value: QStringW);
+begin
+if FName <> Value then
+  begin
+  if Assigned(FParent) then
+    begin
+    if FParent.IndexOf(Value) <> -1 then
+      raise Exception.CreateFmt(SNodeNameExists, [Value]);
+    end;
+  FName := Value;
+  DoNodeNameChanged(Self);
+  end;
+end;
+
 {$IFDEF UNICODE}
 
 procedure TQMsgPack.ToRecord<T>(var ARecord: T);
@@ -3854,19 +4178,19 @@ else
   Result := TQHashedMsgPack.Create;
 end;
 
-procedure TQHashedMsgPack.Delete(AIndex: Integer);
-var
-  AItem: TQMsgPack;
-begin
-AItem := Items[AIndex];
-FHashTable.Delete(Pointer(AIndex), AItem.NameHash);
-inherited;
-end;
-
 destructor TQHashedMsgPack.Destroy;
 begin
 FreeObject(FHashTable);
 inherited;
+end;
+
+procedure TQHashedMsgPack.DoNodeNameChanged(ANode: TQMsgPack);
+begin
+if ANode.FNameHash = 0 then
+  ANode.FNameHash := HashOf(PQCharW(ANode.Name), Length(ANode.Name) shl 1);
+if Assigned(ANode.Parent) then
+  TQHashedMsgPack(ANode.Parent).FHashTable.Add(Pointer(Count - 1),
+    ANode.FNameHash);
 end;
 
 function TQHashedMsgPack.IndexOf(const AName: QStringW): Integer;
@@ -3890,6 +4214,13 @@ while AList <> nil do
   else
     AList := FHashTable.FindNext(AList);
   end;
+end;
+
+function TQHashedMsgPack.Remove(AIndex: Integer): TQMsgPack;
+begin
+Result := inherited Remove(AIndex);
+if Assigned(Result) then
+  FHashTable.Delete(Pointer(AIndex), Result.NameHash);
 end;
 
 procedure TQHashedMsgPack.Replace(AIndex: Integer; ANewItem: TQMsgPack);
