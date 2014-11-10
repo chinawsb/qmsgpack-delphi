@@ -16,12 +16,16 @@ QMsgPack is not a desgin time package.So just place QMsgPack files into search p
 
 ### Support
 · Topic in Website (http://www.qdac.cc/?cat=44)
+
 · Mail to author (chinawsb@sina.com)
+
 · Post in forum (http://tieba.baidu.com/f?kw=qdac)
+
 · QQ Group (250530692)
 
 ### Source check out
 · HTTP (http://svn.code.sf.net/p/qdac3/code/)
+
 · SVN (svn://svn.code.sf.net/p/qdac3/code/)
 
 ### Example
