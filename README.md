@@ -4,8 +4,11 @@ QMsgPack is a part of QDAC 3.0,Source code hosted in Sourceforge(http://sourcefo
 
 ### Feathers
 · Full types support,include messagepack extension type
+
 · Full open source,free for used in ANY PURPOSE
+
 · Quick and simple interface
+
 · RTTI support include
 
 ### Install
